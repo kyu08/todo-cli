@@ -15,7 +15,7 @@ interface DataKouzou {
 }
 ```
 
-# できること
+# 機能
 (優先順位高)
 - todo を表示する
   - todoをoneShot と dailyTask、別々に一覧表示。
@@ -37,5 +37,8 @@ $ todo -d <taskId> // (taskId: number) task の done を toggle
 
 ```
 # todo
-[ ] 対話形式どうやってやるん
-[ ] コマンドによって処理を分岐させる方法 
+- task のプロパティに createdAt, deleted を追加
+- 表形式で表示する
+  - done はチェックマーク✔︎
+- 対話形式どうやってやるん
+- コマンドによって処理を分岐させる方法 
