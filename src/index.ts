@@ -20,7 +20,7 @@ const task: taskInterface = {
   done: false
 }
 
-const read = (): any => {
+const read = (): any[] => {
   const data = fs.readFileSync(path, "utf-8")
   if (!data) return [];
   return JSON.parse(data);
@@ -35,20 +35,16 @@ const writeFile = (tasks: any[]): void => {
 }
 
 const show = () => {
-  fs.readFile(path, "utf-8", (err, data) => {
-    if (err) console.log(err);
-    const dataParsed: taskInterface[] = JSON.parse(data);
-    dataParsed.map(t => {
+    read().map(t => {
       const {id, taskType, content, deadline, done} = t;
       console.log(id, taskType, content, deadline, done);
-    })
-    console.log(data);
-  });
+    });
 }
 
-console.log("=======");
-console.log(read());
-const newTasks = concatTask(task);
-writeFile(newTasks);
-console.log("=======");
-console.log(read());
+// console.log("=======");
+// console.log(read());
+// const newTasks = concatTask(task);
+// writeFile(newTasks);
+// console.log("=======");
+// console.log(read());
+show();
