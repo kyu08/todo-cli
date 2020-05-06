@@ -1,5 +1,6 @@
 node_modules
-*.js
 .idea
 .vscode
 *.iml
+dist
+package-lock.json
