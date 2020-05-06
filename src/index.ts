@@ -1,3 +1,4 @@
+// todo class でかこうぜ
 import * as fs from "fs";
 
 type taskType = "daily" | "oneShot";
