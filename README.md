@@ -5,9 +5,13 @@ cli で使えるtodoアプリ。デイリータスクとやりきりのタスク
 # データの構造
 
 ```tsx
-interface {
-	
+type taskType = "daily" | "oneShot";
 
+interface DataKouzou {
+  taskType: taskType;
+  content: string;
+  deadline: Date;
+  done: boolean;
 }
 ```
 
