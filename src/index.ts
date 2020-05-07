@@ -1,5 +1,7 @@
 // todo class でかこうぜ
 import * as fs from "fs";
+import table from "./table";
+
 
 type taskType = "daily" | "oneShot";
 
@@ -34,13 +36,21 @@ const writeFile = (tasks: any[]): void => {
   fs.writeFileSync(path, JSON.stringify(tasks));
 }
 
+// const header = ["id", "done", "taskType", "content", "deadline"];
 const show = () => {
     read().map(t => {
       const {id, taskType, content, deadline, done} = t;
-      console.log(id, taskType, content, deadline, done);
+      const taskShaped = [id, convertBool(done), taskType, content, deadline];
+      return table.push(taskShaped);
     });
+  console.log(table.toString());
 }
 
+const  convertBool = (bool: boolean): string => {
+  if(bool) return "done!";
+  return "not yet...";
+}
+// console.log(show());
 // console.log("=======");
 // console.log(read());
 // const newTasks = concatTask(task);

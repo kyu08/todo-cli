@@ -15,6 +15,9 @@ interface DataKouzou {
 }
 ```
 
+# 表示形式
+["id", "done", "taskType", "content", "deadline"];
+
 # 機能
 (優先順位高)
 - todo を表示する
