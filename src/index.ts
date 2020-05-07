@@ -70,7 +70,7 @@ const  convertBool = (bool: boolean): string => {
   return "not yet...";
 }
 
-// todo tasks を Map オブジェクトで書くとここすっきりかける。
+// todo tasks を Map オブジェクトで書くとここすっきりかけるかも。
 const deleteTask = (id: number): void => {
   const tasks = read();
   const task = tasks.find(t => t.id === id)
@@ -91,9 +91,10 @@ const debug = () => {
   console.log(table.toString());
 }
 
-deleteTask(1);
+// console.log(debug());
 debug();
 
-// console.log(debug());
+
+// deleteTask(1);
 // testDataArray.map(t => concatAndWriteFile(t));
 // show();
