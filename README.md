@@ -40,8 +40,8 @@ $ todo -d <taskId> // (taskId: number) task の done を toggle
 
 ```
 # todo
-- task のプロパティに createdAt, deleted を追加
 - 表形式で表示する
   - done はチェックマーク✔︎
 - 対話形式どうやってやるん
 - コマンドによって処理を分岐させる方法 
+- (deleted だけでいいかも)task のプロパティに createdAt, deleted を追加
