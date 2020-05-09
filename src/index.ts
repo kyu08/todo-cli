@@ -4,7 +4,7 @@ import {tableNomal, tableForDebug } from "./table";
 
 type taskType = "daily" | "oneShot";
 
-interface taskInterface {
+interface TaskProps {
   id: number;
   taskType: taskType;
   content: string;
@@ -14,7 +14,7 @@ interface taskInterface {
 }
 
 const path = "task.json";
-const testDataArray: taskInterface[] = [
+const testDataArray: TaskProps[] = [
   {
     id: 1,
     taskType: "daily",
@@ -33,7 +33,7 @@ const testDataArray: taskInterface[] = [
   }
 ];
 
-const read = (): taskInterface[] => {
+const read = (): TaskProps[] => {
   const data = fs.readFileSync(path, "utf-8")
   if (!data) return [];
   return JSON.parse(data);
@@ -53,7 +53,6 @@ const concatAndWriteFile = (task: any): void => {
   writeFile(newTasks);
 }
 
-// const header = ["id", "done", "taskType", "content", "deadline"];
 const show = () => {
   const table = tableNomal
   read().map(t => {
@@ -70,11 +69,10 @@ const  convertBool = (bool: boolean): string => {
   return "not yet...";
 }
 
-// todo tasks を Map オブジェクトで書くとここすっきりかけるかも。
 const deleteTask = (id: number): void => {
   const tasks = read();
-  const task = tasks.find(t => t.id === id)
-  if (task) {
+  let task: any | null = tasks.find(t => t.id === id)
+  if (typeof task === "object") {
     task.deleted = true;
     const newTasks = tasks;
     writeFile(newTasks);
@@ -91,10 +89,4 @@ const debug = () => {
   console.log(table.toString());
 }
 
-// console.log(debug());
 debug();
-
-
-// deleteTask(1);
-// testDataArray.map(t => concatAndWriteFile(t));
-// show();

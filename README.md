@@ -1,4 +1,4 @@
-# todo-cli
+# todo-cli だよ
 cli で使えるtodoアプリ。デイリータスクとやりきりのタスクを別で管理したい。
 
 # データの構造
@@ -44,4 +44,4 @@ $ todo -d <taskId> // (taskId: number) task の done を toggle
   - done はチェックマーク✔︎
 - 対話形式どうやってやるん
 - コマンドによって処理を分岐させる方法 
-- (deleted だけでいいかも)task のプロパティに createdAt, deleted を追加
+[- (deleted だけでいいかも)task のプロパティに createdAt, deleted を追加
