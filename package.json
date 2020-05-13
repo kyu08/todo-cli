@@ -3,11 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "description": "cli で使えるtodoアプリ。デイリータスクとやりきりのタスクを別で管理したい。",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "todo": "node dist/main.js"
+    "build": "webpack"
+  },
+  "mode": "development",
+  "preferGlobal": true,
+  "bin": {
+    "todo": "./bin/todo.js"
   },
   "repository": {
     "type": "git",

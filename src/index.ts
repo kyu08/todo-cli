@@ -2,6 +2,7 @@
 import * as fs from "fs";
 import * as inquirer from "inquirer";
 import {tableNomal, tableForDebug } from "./table";
+import cac from 'cac'
 
 type taskKind = "daily" | "oneShot";
 type TaskType = TaskProps & {};
@@ -19,6 +20,14 @@ type TaskProps = ValueProps & {
 }
 
 const path = "task.json";
+const cli = cac()
+
+cli.command('[id]', 'Enter task id which you want to be done.').action(() => {
+  console.log(process.argv[2]);
+})
+
+cli.help()
+cli.parse()
 
 class Task implements TaskType {
   id: number;
@@ -119,39 +128,38 @@ const QUESTIONS = [
   }
 ];
 
-inquirer
-  .prompt(
-    QUESTIONS
-  )
-  .then((answers: any) => {
-    const {taskKind, content, deadline} = answers;
-    const newId = read().size + 1;
-    const otherProps: {
-      done: boolean;
-      deleted: boolean;
-    } = {
-      done: false,
-      deleted: false
-    };
-    const mainProps: {
-      taskKind: taskKind,
-      content: string,
-      deadline: any
-    } = {
-      taskKind,
-      content,
-      deadline
-    }
-    const props = Object.assign({id: newId}, mainProps, otherProps);
-    const task = new Task(props);
-    concatAndWriteFile(task);
-    show();
-    // todo show() がうまくいかないところから！
-  })
-  .catch(error => {
-    if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else when wrong
-    }
-  });
+// inquirer
+//   .prompt(
+//     QUESTIONS
+//   )
+//   .then((answers: any) => {
+//     const {taskKind, content, deadline} = answers;
+//     const newId = read().size + 1;
+//     const otherProps: {
+//       done: boolean;
+//       deleted: boolean;
+//     } = {
+//       done: false,
+//       deleted: false
+//     };
+//     const mainProps: {
+//       taskKind: taskKind,
+//       content: string,
+//       deadline: any
+//     } = {
+//       taskKind,
+//       content,
+//       deadline
+//     }
+//     const props = Object.assign({id: newId}, mainProps, otherProps);
+//     const task = new Task(props);
+//     concatAndWriteFile(task);
+//     show();
+//   })
+//   .catch(error => {
+//     if (error.isTtyError) {
+//       // Prompt couldn't be rendered in the current environment
+//     } else {
+//       // Something else when wrong
+//     }
+//   });
