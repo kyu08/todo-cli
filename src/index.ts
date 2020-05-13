@@ -79,10 +79,6 @@ const convertBool = (bool: boolean): string => {
   return "not yet...";
 }
 
-const instantiateMap = (v: any[]): Map<any, any> => {
-  return new Map([...v]);
-}
-
 const deleteTask = (id: number): void => {
   const tasks = read();
   let task: any | null = tasks.get(id);
