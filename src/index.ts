@@ -1,5 +1,3 @@
-// todo read() 関係のところ Map 対応
-// todo fs 関係のところ Map 対応
 // todo 他にどんなクラスが必要？ ファイル操作のclass とか？
 import * as fs from "fs";
 import * as inquirer from "inquirer";
@@ -60,15 +58,13 @@ const writeFile = (tasks: Map<any, any>): void => {
 }
 
 const concatAndWriteFile = (task: any): void => {
-  console.log(1);
   const newTasks = concatTask(task);
-  console.log(newTasks);
   writeFile(newTasks);
 }
 
 const show = () => {
-  const table = tableNomal
-  read().forEach((k, v) => {
+  const table = tableNomal;
+  read().forEach((v, k) => {
     if (v.deleted) return table;
     const id = k;
     const {taskKind, content, deadline, done} = v;
@@ -98,7 +94,7 @@ const deleteTask = (id: number): void => {
 }
 
 const debug = () => {
-  const table = tableForDebug
+  const table = tableForDebug;
   read().forEach((k, v) => {
     const id = k;
     const {taskKind, content, deadline, done, deleted} = v;
@@ -152,7 +148,6 @@ inquirer
     }
     const props = Object.assign({id: newId}, mainProps, otherProps);
     const task = new Task(props);
-    console.log(task);
     concatAndWriteFile(task);
     show();
     // todo show() がうまくいかないところから！
