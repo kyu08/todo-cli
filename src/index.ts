@@ -21,24 +21,6 @@ type TaskProps = ValueProps & {
 }
 
 const path = "task.json";
-// const testDataArray: TaskProps[] = [
-//   {
-//     id: 1,
-//     taskKind: "daily",
-//     content: "hoge",
-//     deadline: "tomorrow",
-//     done: false,
-//     deleted: false
-//   },
-//   {
-//     id: 2,
-//     taskKind: "oneShot",
-//     content: "ababa",
-//     deadline: "kinou",
-//     done: true,
-//     deleted: false
-//   }
-// ];
 
 class Task implements TaskType {
   id: number;
@@ -182,19 +164,3 @@ inquirer
       // Something else when wrong
     }
   });
-
-
-// console.log(
-//   {id: 1}, {}
-//
-// );
-// import cac from 'cac'
-//
-// const cli = cac()
-//
-// cli.command('hello [name]', 'Enter your name').action(() => {
-//   "hogehogehogehogehoge"
-// })
-//
-// cli.help()
-// cli.parse()
