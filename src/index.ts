@@ -8,10 +8,12 @@ import {Task, taskKind} from "./Task";
 const path = "task.json";
 const cli = cac()
 
-const read = (): Map<any,any> => {
+export const read = (): Map<any,any> => {
   const data = fs.readFileSync(path, "utf-8")
-  if (data === "{}") return new Map();
+  if (data === "{}" || data === "") return new Map();
   const parsedData = JSON.parse(data);
+  // ここで Task instance を return したい！！！！
+  // ここから！！！！！！！！！！！！！！！！
   return new Map([...parsedData]);
 }
 
@@ -22,7 +24,7 @@ const concatTask = (task: any): any => {
   return tasks.set(id, task);
 }
 
-const writeFile = (tasks: Map<any, any>): void => {
+export const writeFile = (tasks: Map<any, any>): void => {
   fs.writeFileSync(path, JSON.stringify(Array.from(tasks)));
 }
 
@@ -48,26 +50,26 @@ const convertBool = (bool: boolean): string => {
   return "not yet...";
 }
 
-const deleteTask = (id: number): void => {
+const hasNoTask = (id: number): boolean => {
   const tasks = read();
-  let task: any | null = tasks.get(id);
-  if (typeof task === "object") {
-    task.deleted = true;
-    tasks.set(id, task);
-    writeFile(tasks);
-  }
+  return tasks.has(id);
 }
 
-const debug = () => {
-  const table = tableForDebug;
-  read().forEach((k, v) => {
-    const id = k;
-    const {taskKind, content, deadline, done, deleted} = v;
-    const taskShaped = [id, convertBool(done), taskKind, content, deadline, deleted];
-    return table.push(taskShaped);
-  })
-  console.log(table.toString());
+const searchTask = (id: number): any => {
+  const task = read().get(id);
+  return task;
 }
+
+// const debug = () => {
+//   const table = tableForDebug;
+//   read().forEach((k, v) => {
+//     const id = k;
+//     const {taskKind, content, deadline, done, deleted} = v;
+//     const taskShaped = [id, convertBool(done), taskKind, content, deadline, deleted];
+//     return table.push(taskShaped);
+//   })
+//   console.log(table.toString());
+// }
 
 const QUESTIONS = [
   {
@@ -93,26 +95,31 @@ const addTask = () => {
       QUESTIONS
     )
     .then((answers: any) => {
+      console.log(1);
       const {taskKind, content, deadline} = answers;
+      console.log(1.2);
+      console.log(read());
       const newId = read().size + 1;
-      const otherProps: {
+      console.log(2);
+      const propsWithoutId: {
+        taskKind: taskKind;
+        content: string;
+        deadline: any;
         done: boolean;
         deleted: boolean;
-      } = {
-        done: false,
-        deleted: false
-      };
-      const mainProps: {
-        taskKind: taskKind,
-        content: string,
-        deadline: any
+        updateAt: any;
       } = {
         taskKind,
         content,
-        deadline
-      }
-      const props = Object.assign({id: newId}, mainProps, otherProps);
+        deadline,
+        done: false,
+        deleted: false,
+        updateAt: 123
+      };
+      console.log(3);
+      const props = Object.assign({id: newId}, propsWithoutId);
       const task = new Task(props);
+      console.log(task);
       concatAndWriteFile(task);
       show();
     })
@@ -127,14 +134,22 @@ const addTask = () => {
 
 cli.command('add', 'Enter task id which you want to be done.').action(() => {
   addTask();
+  console.log("Added task!");
 });
 
 cli.command('done [id]', 'Enter task id which you want to be done.').action(() => {
-  console.log(process.argv[2]);
+  const id = process.argv[2];
+  console.log(`Made task done!(id: ${id})`);
 });
 
 cli.command('delete [id]', 'Enter task id which you want to be done.').action(() => {
-  //
+  const id = Number(process.argv[2]); // これstring やんけ！
+  if (id === NaN) return;
+  if (hasNoTask(id)) return;
+  const task = searchTask(id);
+  const newTasks = task.deteteTask();
+  writeFile(newTasks);
+  console.log(`Deleted task! (id: ${id})`);
 });
 
 cli.command('show', 'show todo-list').action(() => {
