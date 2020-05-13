@@ -3,50 +3,10 @@ import * as fs from "fs";
 import * as inquirer from "inquirer";
 import {tableNomal, tableForDebug } from "./table";
 import cac from 'cac'
-
-type taskKind = "daily" | "oneShot";
-type TaskType = TaskProps & {};
-
-interface ValueProps {
-  taskKind: taskKind;
-  content: string;
-  deadline: any;
-  done: boolean;
-  deleted: boolean;
-}
-
-type TaskProps = ValueProps & {
-  id: number;
-}
+import {Task, taskKind} from "./Task";
 
 const path = "task.json";
 const cli = cac()
-
-cli.command('[id]', 'Enter task id which you want to be done.').action(() => {
-  console.log(process.argv[2]);
-})
-
-cli.help()
-cli.parse()
-
-class Task implements TaskType {
-  id: number;
-  taskKind: taskKind;
-  content: string;
-  deadline: any;
-  done: boolean;
-  deleted: boolean;
-
-  constructor(props: TaskProps) {
-    const {id, taskKind, content, deadline, done, deleted} = props;
-    this.id = id;
-    this.taskKind = taskKind;
-    this.content = content;
-    this.deadline = deadline;
-    this.done = done;
-    this.deleted = deleted;
-  }
-}
 
 const read = (): Map<any,any> => {
   const data = fs.readFileSync(path, "utf-8")
@@ -117,49 +77,69 @@ const QUESTIONS = [
     choices: ["daily", "oneShot"]
   },
   {
-    // type: "list",
     name: "content",
     message: "content: string"
   },
   {
-    // type: "list",
     name: "deadline",
     message: "deadline: any"
   }
 ];
 
-// inquirer
-//   .prompt(
-//     QUESTIONS
-//   )
-//   .then((answers: any) => {
-//     const {taskKind, content, deadline} = answers;
-//     const newId = read().size + 1;
-//     const otherProps: {
-//       done: boolean;
-//       deleted: boolean;
-//     } = {
-//       done: false,
-//       deleted: false
-//     };
-//     const mainProps: {
-//       taskKind: taskKind,
-//       content: string,
-//       deadline: any
-//     } = {
-//       taskKind,
-//       content,
-//       deadline
-//     }
-//     const props = Object.assign({id: newId}, mainProps, otherProps);
-//     const task = new Task(props);
-//     concatAndWriteFile(task);
-//     show();
-//   })
-//   .catch(error => {
-//     if (error.isTtyError) {
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       // Something else when wrong
-//     }
-//   });
+
+const addTask = () => {
+  inquirer
+    .prompt(
+      QUESTIONS
+    )
+    .then((answers: any) => {
+      const {taskKind, content, deadline} = answers;
+      const newId = read().size + 1;
+      const otherProps: {
+        done: boolean;
+        deleted: boolean;
+      } = {
+        done: false,
+        deleted: false
+      };
+      const mainProps: {
+        taskKind: taskKind,
+        content: string,
+        deadline: any
+      } = {
+        taskKind,
+        content,
+        deadline
+      }
+      const props = Object.assign({id: newId}, mainProps, otherProps);
+      const task = new Task(props);
+      concatAndWriteFile(task);
+      show();
+    })
+    .catch(error => {
+      if (error.isTtyError) {
+        // Prompt couldn't be rendered in the current environment
+      } else {
+        // Something else when wrong
+      }
+    });
+}
+
+cli.command('add', 'Enter task id which you want to be done.').action(() => {
+  addTask();
+});
+
+cli.command('done [id]', 'Enter task id which you want to be done.').action(() => {
+  console.log(process.argv[2]);
+});
+
+cli.command('delete [id]', 'Enter task id which you want to be done.').action(() => {
+  //
+});
+
+cli.command('show', 'show todo-list').action(() => {
+  show();
+});
+
+cli.help();
+cli.parse();
