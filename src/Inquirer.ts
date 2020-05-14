@@ -6,7 +6,7 @@ const QUESTIONS = [
   {
     type: "list",
     name: "taskKind",
-    message: "taskKind",
+    message: "todoKind",
     choices: ["daily", "oneShot"]
   },
   {
@@ -19,7 +19,7 @@ const QUESTIONS = [
   }
 ];
 
-export const addTask = () => {
+export const addTodo = () => {
   inquirer
     .prompt(
       QUESTIONS
@@ -43,8 +43,8 @@ export const addTask = () => {
         updateAt: 123
       };
       const props = Object.assign({id: newId}, propsWithoutId);
-      const task = new Todo(props);
-      concatAndWriteFile(task);
+      const todo = new Todo(props);
+      concatAndWriteFile(todo);
       show();
     })
     .catch(error => {

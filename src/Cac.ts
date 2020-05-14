@@ -1,13 +1,13 @@
 import cac from "cac";
-import {addTask} from "./Inquirer";
-import {hasNoTask, searchTask} from "./TodoMap";
+import {addTodo} from "./Inquirer";
+import {hasNoTodo, searchTodo} from "./TodoMap";
 import {show} from "./View";
 import {writeFile} from "./Dao";
 const cli = cac()
 
 export const bootCac = () => {
   cli.command('add', 'Enter task id which you want to be done.').action(() => {
-    addTask();
+    addTodo();
     console.log("Added task!");
   });
 
@@ -19,8 +19,8 @@ export const bootCac = () => {
   cli.command('delete [id]', 'Enter task id which you want to be done.').action(() => {
     const id = Number(process.argv[2]); // これstring やんけ！
     if (id === NaN) return;
-    if (hasNoTask(id)) return;
-    const task = searchTask(id);
+    if (hasNoTodo(id)) return;
+    const task = searchTodo(id);
     // task の id がundefined なのでうまくいかない。 delete id はやめよう。
     // ここから！！！！！！
     const newTasks = task.deteteTask();

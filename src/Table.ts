@@ -5,11 +5,11 @@ const chars = { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right
   , 'right': '║' , 'right-mid': '╢' , 'middle': '│' };
 
 const tableNomal = new Table({chars});
-const headerNomal = ["id", "done", "taskType", "content", "deadline"];
+const headerNomal = ["id", "done", "todoType", "content", "deadline"];
 tableNomal.push(headerNomal);
 
 const tableForDebug = new Table({chars});
-const headerForDebug = ["id", "done", "taskType", "content", "deadline", "deleted"];
+const headerForDebug = ["id", "done", "todoType", "content", "deadline", "deleted"];
 tableForDebug.push(headerForDebug);
 
 export {tableNomal, tableForDebug};

@@ -18,7 +18,7 @@ export type TaskProps = ValueProps & {
 }
 
 export type TaskType = TaskProps & {
-  deleteTask(): any;
+  deleteTodo(): any;
 };
 
 export class Todo implements TaskType {
@@ -41,7 +41,7 @@ export class Todo implements TaskType {
     this.updateAt = updateAt;
   }
 
-  deleteTask = (): any => {
+  deleteTodo = (): any => {
     const task = new Todo({
       id: this.id,
       taskKind: this.taskKind,
@@ -67,7 +67,7 @@ export const read = (): Map<any,any> => {
   return tasks;
 }
 
-export const concatTask = (task: any): any => {
+export const concatTodo = (task: any): any => {
   const tasks = read();
   const {id} = task;
   delete task.id;
@@ -75,6 +75,6 @@ export const concatTask = (task: any): any => {
 }
 
 export const concatAndWriteFile = (task: any): void => {
-  const newTasks = concatTask(task);
+  const newTasks = concatTodo(task);
   writeFile(newTasks);
 }
