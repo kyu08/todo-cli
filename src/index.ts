@@ -14,7 +14,7 @@ export const read = (): Map<any,any> => {
   const parsedData = JSON.parse(data);
   // ここで Task instance を return したい！！！！
   // ここから！！！！！！！！！！！！！！！！
-  return new Map([...parsedData]);
+  return new Map(parsedData);
 }
 
 const concatTask = (task: any): any => {
