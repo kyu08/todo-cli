@@ -1,3 +1,7 @@
+import fs from "fs";
+import {path} from "./App";
+import {writeFile} from "./Dao";
+
 export type taskKind = "daily" | "oneShot";
 
 export interface ValueProps {
@@ -17,7 +21,7 @@ export type TaskType = TaskProps & {
   deleteTask(): any;
 };
 
-export class Task implements TaskType {
+export class Todo implements TaskType {
   id: number;
   taskKind: taskKind;
   content: string;
@@ -38,7 +42,7 @@ export class Task implements TaskType {
   }
 
   deleteTask = (): any => {
-    const task = new Task({
+    const task = new Todo({
       id: this.id,
       taskKind: this.taskKind,
       content: this.content,
@@ -49,4 +53,28 @@ export class Task implements TaskType {
     })
     return task;
   }
+}
+
+export const read = (): Map<any,any> => {
+  //
+  const data = fs.readFileSync(path, "utf-8")
+  if (data === "{}" || data === "") return new Map();
+  const parsedData = JSON.parse(data);
+  const tasks: Map<number, TaskProps> = new Map(parsedData);
+  tasks.forEach((v: TaskProps, k: number, map: Map<number, TaskProps>) => {
+    map.set(k, new Todo(v));
+  });
+  return tasks;
+}
+
+export const concatTask = (task: any): any => {
+  const tasks = read();
+  const {id} = task;
+  delete task.id;
+  return tasks.set(id, task);
+}
+
+export const concatAndWriteFile = (task: any): void => {
+  const newTasks = concatTask(task);
+  writeFile(newTasks);
 }

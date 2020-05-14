@@ -1,5 +1,8 @@
-import {addTask, hasNoTask, searchTask, show, writeFile} from "./App";
 import cac from "cac";
+import {addTask} from "./Inquirer";
+import {hasNoTask, searchTask} from "./TodoMap";
+import {show} from "./View";
+import {writeFile} from "./Dao";
 const cli = cac()
 
 export const bootCac = () => {
