@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as inquirer from "inquirer";
 import {tableNomal, tableForDebug } from "./table";
 import cac from 'cac'
-import {Task, taskKind} from "./Task";
+import {Task, taskKind, TaskProps} from "./Task";
 
 const path = "task.json";
 const cli = cac()
@@ -12,9 +12,11 @@ export const read = (): Map<any,any> => {
   const data = fs.readFileSync(path, "utf-8")
   if (data === "{}" || data === "") return new Map();
   const parsedData = JSON.parse(data);
-  // ここで Task instance を return したい！！！！
-  // ここから！！！！！！！！！！！！！！！！
-  return new Map(parsedData);
+  const tasks: Map<number, TaskProps> = new Map(parsedData);
+  tasks.forEach((v: TaskProps, k: number, map: Map<number, TaskProps>) => {
+    map.set(k, new Task(v));
+  });
+  return tasks;
 }
 
 const concatTask = (task: any): any => {
@@ -95,12 +97,8 @@ const addTask = () => {
       QUESTIONS
     )
     .then((answers: any) => {
-      console.log(1);
       const {taskKind, content, deadline} = answers;
-      console.log(1.2);
-      console.log(read());
       const newId = read().size + 1;
-      console.log(2);
       const propsWithoutId: {
         taskKind: taskKind;
         content: string;
@@ -116,10 +114,8 @@ const addTask = () => {
         deleted: false,
         updateAt: 123
       };
-      console.log(3);
       const props = Object.assign({id: newId}, propsWithoutId);
       const task = new Task(props);
-      console.log(task);
       concatAndWriteFile(task);
       show();
     })
