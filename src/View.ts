@@ -11,8 +11,8 @@ export const show = () => {
   read().forEach((v, k) => {
     if (v.deleted) return table;
     const id = k;
-    const {todoKind, content, deadline, done} = v;
-    const todoShaped = [id, convertBool(done), todoKind, content, deadline];
+    const {todoKind, content, deadline, done, updateAt} = v;
+    const todoShaped = [id, convertBool(done), todoKind, content, deadline, updateAt];
     return table.push(todoShaped);
   })
   console.log(table.toString());

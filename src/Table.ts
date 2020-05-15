@@ -6,7 +6,7 @@ const chars = { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right
   , 'right': '║' , 'right-mid': '╢' , 'middle': '│' };
 
 const tableNormal = new Table({chars});
-const headerNormal = ["id", "done", "todoType", "content", "deadline"];
+const headerNormal = ["id", "done", "todoType", "content", "deadline", "updateAt"];
 tableNormal.push(headerNormal);
 
 const tableForDebug = new Table({chars});
