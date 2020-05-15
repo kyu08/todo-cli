@@ -19,6 +19,7 @@ export type TaskProps = ValueProps & {
 
 export type TaskType = TaskProps & {
   deleteTodo(): any;
+  doneTodo(): any;
 };
 
 export class Todo implements TaskType {
@@ -39,6 +40,13 @@ export class Todo implements TaskType {
     this.done = done;
     this.deleted = deleted;
     this.updateAt = updateAt;
+  }
+
+  doneTodo = (): any => {
+    const todo = new Todo({
+      ...this, ...{done: true}
+    });
+    return todo;
   }
 
   deleteTodo = (): any => {
