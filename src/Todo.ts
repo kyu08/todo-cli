@@ -42,17 +42,9 @@ export class Todo implements TaskType {
   }
 
   deleteTodo = (): any => {
-    const {id, todoKind, content, deadline, done, updateAt} = this;
-    // todo うごくようになったら　{...this, ...{deleted: true}} をためす
     const todo = new Todo({
-      id,
-      todoKind,
-      content,
-      deadline,
-      done,
-      deleted: true,
-      updateAt,
-    })
+      ...this, ...{deleted: true}
+    });
     return todo;
   }
 }

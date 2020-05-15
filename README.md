@@ -28,6 +28,7 @@ interface DataKouzou {
   - oneShotは期限を設定できる
 - doneにできる
 - taskは削除することができる(flagで管理する？)
+- 削除したタスク一覧
 - 日付が変わったらdailyTaskはautoで done: false に切り替わる。
 (優先順位低)
 
