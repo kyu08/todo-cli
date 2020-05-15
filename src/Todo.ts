@@ -5,34 +5,31 @@ import {returnDate} from "./Date";
 
 export type todoKind = "daily" | "oneShot";
 
-export interface ValueProps {
-  todoKind: todoKind;
-  content: string;
-  deadline: any;
-  done: boolean;
-  deleted: boolean;
-  updateAt: any;
-}
-
-export type TaskProps = ValueProps & {
-  id: number;
-}
-
-export type TaskType = TaskProps & {
-  deleteTodo(): any;
-  doneTodo(): any;
-};
-
-export class Todo implements TaskType {
+export interface TodoProps {
   id: number;
   todoKind: todoKind;
   content: string;
   deadline: any;
   done: boolean;
   deleted: boolean;
-  updateAt: any;
+  updateAt: Date;
+}
 
-  constructor(props: TaskProps) {
+export interface TodoInterface extends TodoProps {
+  deleteTodo(): TodoProps;
+  doneTodo(): TodoProps;
+}
+
+export class Todo implements TodoInterface {
+  id: number;
+  todoKind: todoKind;
+  content: string;
+  deadline: any;
+  done: boolean;
+  deleted: boolean;
+  updateAt: Date;
+
+  constructor(props: TodoProps) {
     const {id, todoKind, content, deadline, done, deleted, updateAt} = props;
     this.id = id;
     this.todoKind = todoKind;
@@ -43,14 +40,14 @@ export class Todo implements TaskType {
     this.updateAt = updateAt;
   }
 
-  doneTodo = (): any => {
+  doneTodo = (): TodoProps => {
     const todo = new Todo({
       ...this, ...{done: true}, ...{updateAt: returnDate()}
     });
     return todo;
   }
 
-  deleteTodo = (): any => {
+  deleteTodo = (): TodoProps => {
     const todo = new Todo({
       ...this, ...{deleted: true}, ...{updateAt: returnDate()}
     });
@@ -58,25 +55,25 @@ export class Todo implements TaskType {
   }
 }
 
-export const read = (): Map<any,any> => {
+export const read = (): Map<number,TodoProps> => {
   const data = fs.readFileSync(path, "utf-8")
   if (data === "{}" || data === "") return new Map();
   const parsedData = JSON.parse(data);
-  const todoMap: Map<number, TaskProps> = new Map(parsedData);
-  todoMap.forEach((v: TaskProps, k: number, map: Map<number, TaskProps>) => {
+  const todoMap: Map<number, TodoProps> = new Map(parsedData);
+  todoMap.forEach((v: TodoProps, k: number, map: Map<number, TodoProps>) => {
     map.set(k, new Todo(v));
   });
   return todoMap;
 }
 
-export const concatTodo = (todo: any): any => {
+export const concatTodo = (todo: TodoProps): Map<number, TodoProps> => {
   const todoMap = read();
   const {id} = todo;
   return todoMap.set(id, todo);
 }
 
 // todo updateFile みたいな関数つくりたい
-export const concatAndWriteFile = (todo: any): void => {
-  const newTasks = concatTodo(todo);
-  writeFile(newTasks);
+export const concatAndWriteFile = (todo: TodoProps): void => {
+  const newTodos = concatTodo(todo);
+  writeFile(newTodos);
 }

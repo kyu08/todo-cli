@@ -25,7 +25,10 @@ export const addTodo = () => {
     .prompt(
       QUESTIONS
     )
+    // .then((answers: {{[todoKind: string]: {}}, {[content: string]: {}}, {[deadline:string]: {}}}): any => {
     .then((answers: any) => {
+      console.log(answers);
+      console.log(typeof answers);
       const {todoKind, content, deadline} = answers;
       const newId = read().size + 1;
       const propsWithoutId: {
