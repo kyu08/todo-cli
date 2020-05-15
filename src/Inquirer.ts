@@ -1,5 +1,5 @@
 import * as inquirer from "inquirer";
-import {concatAndWriteFile, read, Todo, todoKind} from "./Todo";
+import {concatAndWriteFile, read, Todo, todoKind, TodoProps} from "./Todo";
 import {show} from "./View";
 import {returnDate} from "./Date";
 
@@ -25,20 +25,11 @@ export const addTodo = () => {
     .prompt(
       QUESTIONS
     )
-    // .then((answers: {{[todoKind: string]: {}}, {[content: string]: {}}, {[deadline:string]: {}}}): any => {
     .then((answers: any) => {
-      console.log(answers);
-      console.log(typeof answers);
       const {todoKind, content, deadline} = answers;
       const newId = read().size + 1;
-      const propsWithoutId: {
-        todoKind: todoKind;
-        content: string;
-        deadline: any;
-        done: boolean;
-        deleted: boolean;
-        updateAt: any;
-      } = {
+      const props: TodoProps = {
+        id: newId,
         todoKind,
         content,
         deadline,
@@ -46,7 +37,6 @@ export const addTodo = () => {
         deleted: false,
         updateAt: returnDate()
       };
-      const props = Object.assign({id: newId}, propsWithoutId);
       const todo = new Todo(props);
       concatAndWriteFile(todo);
       show();

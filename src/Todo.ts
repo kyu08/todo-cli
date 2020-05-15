@@ -12,7 +12,7 @@ export interface TodoProps {
   deadline: any;
   done: boolean;
   deleted: boolean;
-  updateAt: Date;
+  updateAt: string;
 }
 
 export interface TodoInterface extends TodoProps {
@@ -27,7 +27,7 @@ export class Todo implements TodoInterface {
   deadline: any;
   done: boolean;
   deleted: boolean;
-  updateAt: Date;
+  updateAt: string;
 
   constructor(props: TodoProps) {
     const {id, todoKind, content, deadline, done, deleted, updateAt} = props;
