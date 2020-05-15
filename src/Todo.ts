@@ -1,6 +1,7 @@
 import fs from "fs";
 import {path} from "./App";
 import {writeFile} from "./Dao";
+import {returnDate} from "./Date";
 
 export type todoKind = "daily" | "oneShot";
 
@@ -44,14 +45,14 @@ export class Todo implements TaskType {
 
   doneTodo = (): any => {
     const todo = new Todo({
-      ...this, ...{done: true}
+      ...this, ...{done: true}, ...{updateAt: returnDate()}
     });
     return todo;
   }
 
   deleteTodo = (): any => {
     const todo = new Todo({
-      ...this, ...{deleted: true}
+      ...this, ...{deleted: true}, ...{updateAt: returnDate()}
     });
     return todo;
   }

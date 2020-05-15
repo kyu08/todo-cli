@@ -1,6 +1,7 @@
 import * as inquirer from "inquirer";
 import {concatAndWriteFile, read, Todo, todoKind} from "./Todo";
 import {show} from "./View";
+import {returnDate} from "./Date";
 
 const QUESTIONS = [
   {
@@ -40,7 +41,7 @@ export const addTodo = () => {
         deadline,
         done: false,
         deleted: false,
-        updateAt: 123
+        updateAt: returnDate()
       };
       const props = Object.assign({id: newId}, propsWithoutId);
       const todo = new Todo(props);
