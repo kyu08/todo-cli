@@ -3,6 +3,7 @@ import {addTodo} from "./Inquirer";
 import {hasNoTodo, searchTodo} from "./TodoMap";
 import {show} from "./View";
 import {writeFile} from "./Dao";
+import {read} from "./Todo";
 const cli = cac()
 
 export const bootCac = () => {
@@ -17,17 +18,13 @@ export const bootCac = () => {
   });
 
   cli.command('delete [id]', 'Enter todo id which you want to be done.').action(() => {
-    const id = Number(process.argv[2]); // これstring やんけ！
+    // ここも分離したい
+    const id = Number(process.argv[3]); // これstring やんけ！
     if (id === NaN) return;
     if (hasNoTodo(id)) return;
     const todo = searchTodo(id);
-    // todo の id がundefined なのでうまくいかない。 delete id はやめよう。
-    // ここから！！！！！！
-    // ここなんか微妙じゃね？
-    // const newTodo = todo.deleteTodo();
-    // const newTodos = read().set(id, newTodo);
-    // じゃね？
-    const newTodos = todo.deteteTodo();
+    const newTodo = todo.deleteTodo();
+    const newTodos = read().set(id, newTodo);
     writeFile(newTodos);
     console.log(`Deleted todo! (id: ${id})`);
   });
