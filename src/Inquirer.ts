@@ -1,11 +1,11 @@
 import * as inquirer from "inquirer";
-import {concatAndWriteFile, read, Todo, taskKind} from "./Todo";
+import {concatAndWriteFile, read, Todo, todoKind} from "./Todo";
 import {show} from "./View";
 
 const QUESTIONS = [
   {
     type: "list",
-    name: "taskKind",
+    name: "todoKind",
     message: "todoKind",
     choices: ["daily", "oneShot"]
   },
@@ -25,17 +25,17 @@ export const addTodo = () => {
       QUESTIONS
     )
     .then((answers: any) => {
-      const {taskKind, content, deadline} = answers;
+      const {todoKind, content, deadline} = answers;
       const newId = read().size + 1;
       const propsWithoutId: {
-        taskKind: taskKind;
+        todoKind: todoKind;
         content: string;
         deadline: any;
         done: boolean;
         deleted: boolean;
         updateAt: any;
       } = {
-        taskKind,
+        todoKind,
         content,
         deadline,
         done: false,

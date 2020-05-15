@@ -1,8 +1,8 @@
 import {read} from "./Todo";
 
 export const hasNoTodo = (id: number): boolean => {
-  const tasks = read();
-  return tasks.has(id);
+  const todoMap = read();
+  return todoMap.has(id);
 }
 
 export const searchTodo = (id: number): any => {

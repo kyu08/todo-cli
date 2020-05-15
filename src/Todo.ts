@@ -2,10 +2,10 @@ import fs from "fs";
 import {path} from "./App";
 import {writeFile} from "./Dao";
 
-export type taskKind = "daily" | "oneShot";
+export type todoKind = "daily" | "oneShot";
 
 export interface ValueProps {
-  taskKind: taskKind;
+  todoKind: todoKind;
   content: string;
   deadline: any;
   done: boolean;
@@ -23,7 +23,7 @@ export type TaskType = TaskProps & {
 
 export class Todo implements TaskType {
   id: number;
-  taskKind: taskKind;
+  todoKind: todoKind;
   content: string;
   deadline: any;
   done: boolean;
@@ -31,9 +31,9 @@ export class Todo implements TaskType {
   updateAt: any;
 
   constructor(props: TaskProps) {
-    const {id, taskKind, content, deadline, done, deleted, updateAt} = props;
+    const {id, todoKind, content, deadline, done, deleted, updateAt} = props;
     this.id = id;
-    this.taskKind = taskKind;
+    this.todoKind = todoKind;
     this.content = content;
     this.deadline = deadline;
     this.done = done;
@@ -42,16 +42,16 @@ export class Todo implements TaskType {
   }
 
   deleteTodo = (): any => {
-    const task = new Todo({
+    const todo = new Todo({
       id: this.id,
-      taskKind: this.taskKind,
+      todoKind: this.todoKind,
       content: this.content,
       deadline: this.deadline,
       done: this.done,
       deleted: this.deleted,
       updateAt: this.updateAt
     })
-    return task;
+    return todo;
   }
 }
 
@@ -60,21 +60,21 @@ export const read = (): Map<any,any> => {
   const data = fs.readFileSync(path, "utf-8")
   if (data === "{}" || data === "") return new Map();
   const parsedData = JSON.parse(data);
-  const tasks: Map<number, TaskProps> = new Map(parsedData);
-  tasks.forEach((v: TaskProps, k: number, map: Map<number, TaskProps>) => {
+  const todoMap: Map<number, TaskProps> = new Map(parsedData);
+  todoMap.forEach((v: TaskProps, k: number, map: Map<number, TaskProps>) => {
     map.set(k, new Todo(v));
   });
-  return tasks;
+  return todoMap;
 }
 
-export const concatTodo = (task: any): any => {
-  const tasks = read();
-  const {id} = task;
-  delete task.id;
-  return tasks.set(id, task);
+export const concatTodo = (todo: any): any => {
+  const todoMap = read();
+  const {id} = todo;
+  delete todo.id;
+  return todoMap.set(id, todo);
 }
 
-export const concatAndWriteFile = (task: any): void => {
-  const newTasks = concatTodo(task);
+export const concatAndWriteFile = (todo: any): void => {
+  const newTasks = concatTodo(todo);
   writeFile(newTasks);
 }

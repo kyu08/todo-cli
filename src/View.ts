@@ -1,4 +1,4 @@
-import {tableNomal} from "./Table";
+import {tableNormal} from "./Table";
 import {read} from "./Todo";
 
 const convertBool = (done: boolean): string => {
@@ -7,13 +7,13 @@ const convertBool = (done: boolean): string => {
 }
 
 export const show = () => {
-  const table = tableNomal;
+  const table = tableNormal;
   read().forEach((v, k) => {
     if (v.deleted) return table;
     const id = k;
-    const {taskKind, content, deadline, done} = v;
-    const taskShaped = [id, convertBool(done), taskKind, content, deadline];
-    return table.push(taskShaped);
+    const {todoKind, content, deadline, done} = v;
+    const todoShaped = [id, convertBool(done), todoKind, content, deadline];
+    return table.push(todoShaped);
   })
   console.log(table.toString());
 }
