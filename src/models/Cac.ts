@@ -1,9 +1,10 @@
 import cac from "cac";
 import {addTodo} from "./Inquirer";
-import {hasNoTodo, searchTodo} from "./TodoMap";
-import {show} from "./View";
-import {writeFile} from "./Dao";
+import {hasNoTodo, searchTodo} from "../TodoMap";
+import {show} from "../View";
+import {writeFile} from "../dao/Dao";
 import {read} from "./Todo";
+
 const cli = cac()
 
 export const bootCac = () => {

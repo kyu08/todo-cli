@@ -1,6 +1,6 @@
 import fs from "fs";
-import {path} from "./App";
-import {writeFile} from "./Dao";
+import {path} from "../App";
+import {writeFile} from "../dao/Dao";
 import {returnDate} from "./Date";
 
 export type todoKind = "daily" | "oneShot";

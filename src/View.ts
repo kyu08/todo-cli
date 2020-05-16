@@ -1,5 +1,5 @@
-import {tableNormal} from "./Table";
-import {read} from "./Todo";
+import {tableNormal} from "./models/Table";
+import {read} from "./models/Todo";
 
 const convertBool = (done: boolean): string => {
   if(done) return "done!";

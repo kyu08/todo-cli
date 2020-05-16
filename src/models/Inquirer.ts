@@ -1,6 +1,6 @@
 import * as inquirer from "inquirer";
 import {concatAndWriteFile, read, Todo, todoKind, TodoProps} from "./Todo";
-import {show} from "./View";
+import {show} from "../View";
 import {returnDate} from "./Date";
 
 const QUESTIONS = [
