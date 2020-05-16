@@ -1,4 +1,5 @@
 import Table from "cli-table";
+import colors from "colors";
 
 const chars = { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
   , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
@@ -6,7 +7,12 @@ const chars = { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right
   , 'right': '║' , 'right-mid': '╢' , 'middle': '│' };
 
 const tableNormal = new Table({chars});
-const headerNormal = ["id", "done", "todoType", "content", "deadline", "updateAt"];
+const head = ["id", "done", "todoType", "content", "deadline", "updateAt"];
+
+const headerNormal = head.map(e => {
+  return colors.bold.green(e);
+});
+
 tableNormal.push(headerNormal);
 
 const tableForDebug = new Table({chars});
