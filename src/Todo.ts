@@ -57,7 +57,7 @@ export class Todo implements TodoInterface {
 
 export const read = (): Map<number,TodoProps> => {
   const data = fs.readFileSync(path, "utf-8")
-  if (data === "{}" || data === "") return new Map();
+  if (data === "") return new Map();
   const parsedData = JSON.parse(data);
   const todoMap: Map<number, TodoProps> = new Map(parsedData);
   todoMap.forEach((v: TodoProps, k: number, map: Map<number, TodoProps>) => {
