@@ -8,12 +8,13 @@ const convertBool = (done: boolean): string => {
 
 export const show = () => {
   const table = tableNormal;
-  read().forEach((v, k) => {
+  const todoMap = read();
+  todoMap.forEach((v, k) => {
     if (v.deleted) return table;
     const id = k;
     const {todoKind, content, deadline, done, updateAt} = v;
     const todoShaped = [id, convertBool(done), todoKind, content, deadline, updateAt];
     return table.push(todoShaped);
-  })
+  });
   console.log(table.toString());
 }

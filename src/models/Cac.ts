@@ -17,9 +17,10 @@ export const bootCac = () => {
     const id = Number(process.argv[3]);
     if (id === NaN) return;
     if (hasNoTodo(id)) return;
+    const todoMap = read();
     const todo = searchTodo(id);
     const newTodo = todo.doneTodo();
-    const newTodos = read().set(id, newTodo);
+    const newTodos = todoMap.set(id, newTodo);
     writeFile(newTodos);
     console.log(`Made it done! (id: ${id})`);
   });
@@ -29,9 +30,10 @@ export const bootCac = () => {
     const id = Number(process.argv[3]);
     if (id === NaN) return;
     if (hasNoTodo(id)) return;
+    const todoMap = read();
     const todo = searchTodo(id);
     const newTodo = todo.deleteTodo();
-    const newTodos = read().set(id, newTodo);
+    const newTodos = todoMap.set(id, newTodo);
     writeFile(newTodos);
     console.log(`Deleted todo! (id: ${id})`);
   });

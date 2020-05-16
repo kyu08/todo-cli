@@ -6,6 +6,7 @@ export const hasNoTodo = (id: number): boolean => {
 }
 
 export const searchTodo = (id: number): any => {
-  const todo = read().get(id);
+  const todoMap = read();
+  const todo = todoMap.get(id);
   return todo;
 }

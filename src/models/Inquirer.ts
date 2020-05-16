@@ -27,7 +27,8 @@ export const addTodo = () => {
     )
     .then((answers: any) => {
       const {todoKind, content, deadline} = answers;
-      const newId = read().size + 1;
+      const todoMap = read();
+      const newId = todoMap.size + 1;
       const props: TodoProps = {
         id: newId,
         todoKind,
