@@ -1,6 +1,6 @@
 import cac from "cac";
 import {addTodo} from "./Inquirer";
-import {hasNoTodo, searchTodo} from "../TodoMap";
+import {hasNoTodo, searchTodo} from "./TodoMap";
 import {show} from "../View";
 import {writeFile} from "../dao/Dao";
 import {read} from "./Todo";

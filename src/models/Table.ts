@@ -9,11 +9,11 @@ const chars = { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right
 const tableNormal = new Table({chars});
 const head = ["id", "done", "todoType", "content", "deadline", "updateAt"];
 
-const headerNormal = head.map(e => {
+const headerDecorated = head.map(e => {
   return colors.bold.green(e);
 });
 
-tableNormal.push(headerNormal);
+tableNormal.push(headerDecorated);
 
 const tableForDebug = new Table({chars});
 const headerForDebug = ["id", "done", "todoType", "content", "deadline", "deleted"];
