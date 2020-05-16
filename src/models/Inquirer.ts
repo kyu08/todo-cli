@@ -1,32 +1,32 @@
-import * as inquirer from "inquirer";
-import {concatAndWriteFile, read, Todo, todoKind, TodoProps} from "./Todo";
-import {show} from "../View";
-import {returnDate} from "./Date";
+import * as inquirer from 'inquirer';
+// eslint-disable-next-line import/no-cycle
+import { concatAndWriteFile, read, Todo, TodoProps } from './Todo';
+// eslint-disable-next-line import/no-cycle
+import { show } from '../View';
+import { returnDate } from './Date';
 
 const QUESTIONS = [
   {
-    type: "list",
-    name: "todoKind",
-    message: "todoKind",
-    choices: ["daily", "oneShot"]
+    type: 'list',
+    name: 'todoKind',
+    message: 'todoKind',
+    choices: ['daily', 'oneShot'],
   },
   {
-    name: "content",
-    message: "content: string"
+    name: 'content',
+    message: 'content: string',
   },
   {
-    name: "deadline",
-    message: "deadline: any"
-  }
+    name: 'deadline',
+    message: 'deadline: any',
+  },
 ];
 
 export const addTodo = () => {
   inquirer
-    .prompt(
-      QUESTIONS
-    )
+    .prompt(QUESTIONS)
     .then((answers: any) => {
-      const {todoKind, content, deadline} = answers;
+      const { todoKind, content, deadline } = answers;
       const todoMap = read();
       const newId = todoMap.size + 1;
       const props: TodoProps = {
@@ -36,7 +36,7 @@ export const addTodo = () => {
         deadline,
         done: false,
         deleted: false,
-        updateAt: returnDate()
+        updateAt: returnDate(),
       };
       const todo = new Todo(props);
       concatAndWriteFile(todo);
@@ -49,4 +49,4 @@ export const addTodo = () => {
         // Something else when wrong
       }
     });
-}
+};
