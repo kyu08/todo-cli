@@ -34,7 +34,7 @@ export const addTodo = () => {
         deadline,
         isDone: false,
         isDeleted: false,
-        updateAt: returnDate(),
+        updateAt: new Date(),
       };
       const todo = new Todo(props);
       updateMapAndFile(todo);

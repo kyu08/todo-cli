@@ -1,5 +1,6 @@
 import { tableNormal } from './models/Table';
 import { returnTodoMap } from './models/Todo';
+import { returnDate } from './models/Date';
 
 const convertBool = (isDone: boolean): string => {
   if (isDone) return 'done!';
@@ -20,7 +21,7 @@ export const show = () => {
       todoCategory,
       content,
       deadline,
-      updateAt,
+      returnDate(new Date(updateAt)),
     ];
 
     return table.push(todoShaped);

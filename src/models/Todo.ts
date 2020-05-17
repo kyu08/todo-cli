@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-cycle
 import { loadFile, updateFile } from '../dao/Dao';
-import { returnDate } from './Date';
 
 export type todoCategoryType = 'daily' | 'oneShot';
 
@@ -11,7 +10,7 @@ export interface TodoProps {
   deadline: any;
   isDone: boolean;
   isDeleted: boolean;
-  updateAt: string;
+  updateAt: Date;
 }
 
 export interface TodoInterface extends TodoProps {
@@ -32,7 +31,7 @@ export class Todo implements TodoInterface {
 
   isDeleted: boolean;
 
-  updateAt: string;
+  updateAt: Date;
 
   constructor(props: TodoProps) {
     const {
@@ -57,7 +56,7 @@ export class Todo implements TodoInterface {
     const todo = new Todo({
       ...this,
       ...{ isDone: true },
-      ...{ updateAt: returnDate() },
+      ...{ updateAt: new Date() },
     });
 
     return todo;
@@ -67,7 +66,7 @@ export class Todo implements TodoInterface {
     const todo = new Todo({
       ...this,
       ...{ isDeleted: true },
-      ...{ updateAt: returnDate() },
+      ...{ updateAt: new Date() },
     });
 
     return todo;
