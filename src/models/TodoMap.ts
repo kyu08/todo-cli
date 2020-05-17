@@ -26,7 +26,6 @@ export const updateDone = (id: number): void => {
 };
 
 export const updateDelete = (id: number): void => {
-  if (Number.isNaN(id)) return;
   if (hasNoTodo(id)) return;
   const message = 'Deleted todo! ';
   const todoMap = read();
