@@ -78,15 +78,7 @@ export const read = (): Map<number, TodoProps> => {
   return todoMap;
 };
 
-export const concatTodo = (todo: TodoProps): Map<number, TodoProps> => {
+export const updateMapAndFile = (todo: TodoProps): void => {
   const todoMap = read();
-  const { id } = todo;
-
-  return todoMap.set(id, todo);
-};
-
-// todo updateFile みたいな関数つくりたい
-export const concatAndWriteFile = (todo: TodoProps): void => {
-  const newTodos = concatTodo(todo);
-  updateFile(newTodos);
+  updateFile(todoMap.set(todo.id, todo));
 };

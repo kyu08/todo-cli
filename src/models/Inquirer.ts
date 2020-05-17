@@ -1,5 +1,5 @@
 import * as inquirer from 'inquirer';
-import { concatAndWriteFile, read, Todo, TodoProps } from './Todo';
+import { updateMapAndFile, read, Todo, TodoProps } from './Todo';
 import { show } from '../View';
 import { returnDate } from './Date';
 
@@ -37,7 +37,7 @@ export const addTodo = () => {
         updateAt: returnDate(),
       };
       const todo = new Todo(props);
-      concatAndWriteFile(todo);
+      updateMapAndFile(todo);
       show();
     })
     .catch(error => {
