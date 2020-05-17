@@ -1,6 +1,6 @@
 import cac from 'cac';
 import { addTodo } from './Inquirer';
-import { searchTodo, updateBoolean } from './TodoMap';
+import { hasNoTodo, searchTodo, updateBoolean } from './TodoMap';
 import { show } from '../View';
 
 const cli = cac();
@@ -25,9 +25,11 @@ export const bootCac = () => {
     .command('done [idString]', 'Enter todo id which you want to be done.')
     .action(idString => {
       const id = Number(idString);
+      if (hasNoTodo(id)) return;
+      if (informNaN(id)) return;
+
       const todo = searchTodo(id);
       const newTodo = todo.doneTodo();
-      if (informNaN(id)) return;
       updateBoolean(id, newTodo, 'Done todo!');
       show();
     });
@@ -36,9 +38,11 @@ export const bootCac = () => {
     .command('delete [idString]', 'Enter todo id which you want to be done.')
     .action(idString => {
       const id = Number(idString);
+      if (hasNoTodo(id)) return;
+      if (informNaN(id)) return;
+
       const todo = searchTodo(id);
       const newTodo = todo.deleteTodo();
-      if (informNaN(id)) return;
       updateBoolean(id, newTodo, 'Deleted todo!');
       show();
     });
