@@ -1,8 +1,6 @@
 import fs from 'fs';
 // eslint-disable-next-line import/no-cycle
-import { path } from '../App';
-// eslint-disable-next-line import/no-cycle
-import { writeFile } from '../dao/Dao';
+import { path, writeFile } from '../dao/Dao';
 import { returnDate } from './Date';
 
 export type todoKind = 'daily' | 'oneShot';

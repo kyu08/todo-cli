@@ -2,8 +2,6 @@
 // eslint-disable-next-line import/no-cycle
 import { bootCac } from './models/Cac';
 
-export const path = 'todo.json';
-
 export class App {
   mount = () => {
     bootCac();
