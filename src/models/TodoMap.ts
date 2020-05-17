@@ -1,6 +1,5 @@
 import { read, TodoInterface } from './Todo';
-import { writeFile } from '../dao/Dao';
-import { informNaN } from './Cac';
+import { updateFile } from '../dao/Dao';
 
 export const hasNoTodo = (id: number): boolean => {
   const todoMap = read();
@@ -21,7 +20,7 @@ export const updateBoolean = (
   message: string,
 ): void => {
   const todoMap = read();
-  writeFile(todoMap.set(id, todoUpdated));
+  updateFile(todoMap.set(id, todoUpdated));
   console.log(`${message}(id: ${id})`);
 };
 

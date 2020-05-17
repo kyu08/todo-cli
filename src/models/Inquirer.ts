@@ -7,7 +7,7 @@ const QUESTIONS = [
   {
     type: 'list',
     name: 'todoKind',
-    message: 'todoKind',
+    message: 'Choose a todoKind',
     choices: ['daily', 'oneShot'],
   },
   {

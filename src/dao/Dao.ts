@@ -4,6 +4,6 @@ import { TodoProps } from '../models/Todo';
 
 export const path = 'todo.json';
 
-export const writeFile = (todoMap: Map<number, TodoProps>): void => {
+export const updateFile = (todoMap: Map<number, TodoProps>): void => {
   fs.writeFileSync(path, JSON.stringify(Array.from(todoMap)));
 };

@@ -1,6 +1,6 @@
 import fs from 'fs';
 // eslint-disable-next-line import/no-cycle
-import { path, writeFile } from '../dao/Dao';
+import { path, updateFile } from '../dao/Dao';
 import { returnDate } from './Date';
 
 export type todoKind = 'daily' | 'oneShot';
@@ -89,5 +89,5 @@ export const concatTodo = (todo: TodoProps): Map<number, TodoProps> => {
 // todo updateFile みたいな関数つくりたい
 export const concatAndWriteFile = (todo: TodoProps): void => {
   const newTodos = concatTodo(todo);
-  writeFile(newTodos);
+  updateFile(newTodos);
 };
