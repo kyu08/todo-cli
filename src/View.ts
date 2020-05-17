@@ -1,5 +1,5 @@
 import { tableNormal } from './models/Table';
-import { read } from './models/Todo';
+import { returnTodoMap } from './models/Todo';
 
 const convertBool = (done: boolean): string => {
   if (done) return 'done!';
@@ -9,7 +9,7 @@ const convertBool = (done: boolean): string => {
 
 export const show = () => {
   const table = tableNormal;
-  const todoMap = read();
+  const todoMap = returnTodoMap();
   todoMap.forEach((v, k) => {
     if (v.deleted) return table;
     const id = k;

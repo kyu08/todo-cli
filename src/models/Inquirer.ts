@@ -1,5 +1,5 @@
 import * as inquirer from 'inquirer';
-import { updateMapAndFile, read, Todo, TodoProps } from './Todo';
+import { updateMapAndFile, returnTodoMap, Todo, TodoProps } from './Todo';
 import { show } from '../View';
 import { returnDate } from './Date';
 
@@ -25,7 +25,7 @@ export const addTodo = () => {
     .prompt(QUESTIONS)
     .then((answers: any) => {
       const { todoKind, content, deadline } = answers;
-      const todoMap = read();
+      const todoMap = returnTodoMap();
       const newId = todoMap.size + 1;
       const props: TodoProps = {
         id: newId,

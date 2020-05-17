@@ -66,7 +66,8 @@ export class Todo implements TodoInterface {
   };
 }
 
-export const read = (): Map<number, TodoProps> => {
+// todo.json から Todo(: string) を読み込んで Map オブジェクト化と value の Todo インスタンス化をして返す
+export const returnTodoMap = (): Map<number, TodoProps> => {
   const data = loadFile();
   if (data === '') return new Map();
   const parsedData = JSON.parse(data);
@@ -79,6 +80,6 @@ export const read = (): Map<number, TodoProps> => {
 };
 
 export const updateMapAndFile = (todo: TodoProps): void => {
-  const todoMap = read();
+  const todoMap = returnTodoMap();
   updateFile(todoMap.set(todo.id, todo));
 };

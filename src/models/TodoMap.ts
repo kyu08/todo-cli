@@ -1,14 +1,14 @@
-import { read, TodoInterface } from './Todo';
+import { returnTodoMap, TodoInterface } from './Todo';
 import { updateFile } from '../dao/Dao';
 
 export const hasNoTodo = (id: number): boolean => {
-  const todoMap = read();
+  const todoMap = returnTodoMap();
 
   return !todoMap.has(id);
 };
 
 export const searchTodo = (id: number): any => {
-  const todoMap = read();
+  const todoMap = returnTodoMap();
   const todo = todoMap.get(id);
 
   return todo;
@@ -19,7 +19,7 @@ export const updateBoolean = (
   todoUpdated: TodoInterface,
   message: string,
 ): void => {
-  const todoMap = read();
+  const todoMap = returnTodoMap();
   updateFile(todoMap.set(id, todoUpdated));
   console.log(`${message}(id: ${id})`);
 };
