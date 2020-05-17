@@ -6,8 +6,8 @@ import { returnDate } from './Date';
 const QUESTIONS = [
   {
     type: 'list',
-    name: 'todoKind',
-    message: 'Choose a todoKind',
+    name: 'todoCategory',
+    message: 'Choose a todoCategory',
     choices: ['daily', 'oneShot'],
   },
   {
@@ -24,12 +24,12 @@ export const addTodo = () => {
   inquirer
     .prompt(QUESTIONS)
     .then((answers: any) => {
-      const { todoKind, content, deadline } = answers;
+      const { todoCategory, content, deadline } = answers;
       const todoMap = returnTodoMap();
       const newId = todoMap.size + 1;
       const props: TodoProps = {
         id: newId,
-        todoKind,
+        todoCategory,
         content,
         deadline,
         done: false,

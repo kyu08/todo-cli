@@ -13,11 +13,11 @@ export const show = () => {
   todoMap.forEach((v, k) => {
     if (v.deleted) return table;
     const id = k;
-    const { todoKind, content, deadline, done, updateAt } = v;
+    const { todoCategory, content, deadline, done, updateAt } = v;
     const todoShaped = [
       id,
       convertBool(done),
-      todoKind,
+      todoCategory,
       content,
       deadline,
       updateAt,

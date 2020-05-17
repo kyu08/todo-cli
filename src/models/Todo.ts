@@ -2,11 +2,11 @@
 import { loadFile, updateFile } from '../dao/Dao';
 import { returnDate } from './Date';
 
-export type todoKind = 'daily' | 'oneShot';
+export type todoCategoryType = 'daily' | 'oneShot';
 
 export interface TodoProps {
   id: number;
-  todoKind: todoKind;
+  todoCategory: todoCategoryType;
   content: string;
   deadline: any;
   done: boolean;
@@ -22,7 +22,7 @@ export interface TodoInterface extends TodoProps {
 export class Todo implements TodoInterface {
   id: number;
 
-  todoKind: todoKind;
+  todoCategory: todoCategoryType;
 
   content: string;
 
@@ -35,9 +35,17 @@ export class Todo implements TodoInterface {
   updateAt: string;
 
   constructor(props: TodoProps) {
-    const { id, todoKind, content, deadline, done, deleted, updateAt } = props;
+    const {
+      id,
+      todoCategory,
+      content,
+      deadline,
+      done,
+      deleted,
+      updateAt,
+    } = props;
     this.id = id;
-    this.todoKind = todoKind;
+    this.todoCategory = todoCategory;
     this.content = content;
     this.deadline = deadline;
     this.done = done;
