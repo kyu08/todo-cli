@@ -1,13 +1,6 @@
 import * as inquirer from 'inquirer';
-import {
-  updateMapAndFile,
-  returnTodoMap,
-  Todo,
-  TodoProps,
-  passNewTodoToInquirer,
-} from './Todo';
+import { updateMapAndFile, passNewTodoToInquirer } from './Todo';
 import { show } from '../View';
-import { returnDate } from './Date';
 
 const QUESTIONS = [
   {
