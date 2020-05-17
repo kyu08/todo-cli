@@ -1,3 +1,10 @@
-node_modules/
 *.config.js
 *.md
+main.js
+node_modules
+.idea
+.vscode
+*.iml
+dist
+package-lock.json
+todo.json

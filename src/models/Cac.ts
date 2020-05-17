@@ -22,7 +22,7 @@ export const bootCac = () => {
     .command('done [id]', 'Enter todo id which you want to be done.')
     .action(() => {
       const id = Number(process.argv[3]);
-      if (id === NaN) return;
+      if (Number.isNaN(id)) return;
       if (hasNoTodo(id)) return;
       const todoMap = read();
       const todo = searchTodo(id);
@@ -37,7 +37,7 @@ export const bootCac = () => {
     .action(() => {
       // ここも分離したい
       const id = Number(process.argv[3]);
-      if (id === NaN) return;
+      if (Number.isNaN(id)) return;
       if (hasNoTodo(id)) return;
       const todoMap = read();
       const todo = searchTodo(id);
