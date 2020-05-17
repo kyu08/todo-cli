@@ -1,8 +1,8 @@
 import { tableNormal } from './models/Table';
 import { returnTodoMap } from './models/Todo';
 
-const convertBool = (done: boolean): string => {
-  if (done) return 'done!';
+const convertBool = (isDone: boolean): string => {
+  if (isDone) return 'done!';
 
   return 'not yet...';
 };
@@ -11,12 +11,12 @@ export const show = () => {
   const table = tableNormal;
   const todoMap = returnTodoMap();
   todoMap.forEach((v, k) => {
-    if (v.deleted) return table;
+    if (v.isDeleted) return table;
     const id = k;
-    const { todoCategory, content, deadline, done, updateAt } = v;
+    const { todoCategory, content, deadline, isDone, updateAt } = v;
     const todoShaped = [
       id,
-      convertBool(done),
+      convertBool(isDone),
       todoCategory,
       content,
       deadline,

@@ -20,7 +20,7 @@ const chars = {
 };
 
 const tableNormal = new Table({ chars });
-const head = ['id', 'done', 'todoType', 'content', 'deadline', 'updateAt'];
+const head = ['id', 'isDone', 'todoType', 'content', 'deadline', 'updateAt'];
 
 const headerDecorated = head.map(e => {
   return colors.bold.green(e);
@@ -35,7 +35,7 @@ const headerForDebug = [
   'todoType',
   'content',
   'deadline',
-  'deleted',
+  'isDeleted',
 ];
 tableForDebug.push(headerForDebug);
 

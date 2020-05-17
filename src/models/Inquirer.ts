@@ -32,8 +32,8 @@ export const addTodo = () => {
         todoCategory,
         content,
         deadline,
-        done: false,
-        deleted: false,
+        isDone: false,
+        isDeleted: false,
         updateAt: returnDate(),
       };
       const todo = new Todo(props);

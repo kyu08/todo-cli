@@ -9,8 +9,8 @@ export interface TodoProps {
   todoCategory: todoCategoryType;
   content: string;
   deadline: any;
-  done: boolean;
-  deleted: boolean;
+  isDone: boolean;
+  isDeleted: boolean;
   updateAt: string;
 }
 
@@ -28,9 +28,9 @@ export class Todo implements TodoInterface {
 
   deadline: any;
 
-  done: boolean;
+  isDone: boolean;
 
-  deleted: boolean;
+  isDeleted: boolean;
 
   updateAt: string;
 
@@ -40,23 +40,23 @@ export class Todo implements TodoInterface {
       todoCategory,
       content,
       deadline,
-      done,
-      deleted,
+      isDone,
+      isDeleted,
       updateAt,
     } = props;
     this.id = id;
     this.todoCategory = todoCategory;
     this.content = content;
     this.deadline = deadline;
-    this.done = done;
-    this.deleted = deleted;
+    this.isDone = isDone;
+    this.isDeleted = isDeleted;
     this.updateAt = updateAt;
   }
 
   doneTodo = (): TodoProps => {
     const todo = new Todo({
       ...this,
-      ...{ done: true },
+      ...{ isDone: true },
       ...{ updateAt: returnDate() },
     });
 
@@ -66,7 +66,7 @@ export class Todo implements TodoInterface {
   deleteTodo = (): TodoProps => {
     const todo = new Todo({
       ...this,
-      ...{ deleted: true },
+      ...{ isDeleted: true },
       ...{ updateAt: returnDate() },
     });
 
