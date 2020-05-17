@@ -1,6 +1,5 @@
-import fs from 'fs';
 // eslint-disable-next-line import/no-cycle
-import { path, updateFile } from '../dao/Dao';
+import { loadFile, updateFile } from '../dao/Dao';
 import { returnDate } from './Date';
 
 export type todoKind = 'daily' | 'oneShot';
@@ -68,7 +67,7 @@ export class Todo implements TodoInterface {
 }
 
 export const read = (): Map<number, TodoProps> => {
-  const data = fs.readFileSync(path, 'utf-8');
+  const data = loadFile();
   if (data === '') return new Map();
   const parsedData = JSON.parse(data);
   const todoMap: Map<number, TodoProps> = new Map(parsedData);

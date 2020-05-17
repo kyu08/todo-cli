@@ -7,3 +7,7 @@ export const path = 'todo.json';
 export const updateFile = (todoMap: Map<number, TodoProps>): void => {
   fs.writeFileSync(path, JSON.stringify(Array.from(todoMap)));
 };
+
+export const loadFile = (): string => {
+  return fs.readFileSync(path, 'utf-8');
+};
