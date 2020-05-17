@@ -1,16 +1,19 @@
 import cac from 'cac';
-// eslint-disable-next-line import/no-cycle
 import { addTodo } from './Inquirer';
-// eslint-disable-next-line import/no-cycle
-import { hasNoTodo, searchTodo } from './TodoMap';
-// eslint-disable-next-line import/no-cycle
+import { updateDelete, updateDone } from './TodoMap';
 import { show } from '../View';
-// eslint-disable-next-line import/no-cycle
-import { writeFile } from '../dao/Dao';
-// eslint-disable-next-line import/no-cycle
-import { read } from './Todo';
 
 const cli = cac();
+
+export const informNaN = (id: number): boolean => {
+  if (Number.isNaN(id)) {
+    console.log('didnt update.');
+
+    return true;
+  }
+
+  return false;
+};
 
 export const bootCac = () => {
   cli.command('add', 'Enter todo id which you want to be done.').action(() => {
@@ -19,32 +22,21 @@ export const bootCac = () => {
   });
 
   cli
-    .command('done [id]', 'Enter todo id which you want to be done.')
-    .action(() => {
-      const id = Number(process.argv[3]);
-      if (Number.isNaN(id)) return;
-      if (hasNoTodo(id)) return;
-      const todoMap = read();
-      const todo = searchTodo(id);
-      const newTodo = todo.doneTodo();
-      const newTodos = todoMap.set(id, newTodo);
-      writeFile(newTodos);
-      console.log(`Made it done! (id: ${id})`);
+    .command('done [idString]', 'Enter todo id which you want to be done.')
+    .action(idString => {
+      const id = Number(idString);
+      if (informNaN(id)) return;
+      updateDone(id);
+      show();
     });
 
   cli
-    .command('delete [id]', 'Enter todo id which you want to be done.')
-    .action(() => {
-      // ここも分離したい
-      const id = Number(process.argv[3]);
-      if (Number.isNaN(id)) return;
-      if (hasNoTodo(id)) return;
-      const todoMap = read();
-      const todo = searchTodo(id);
-      const newTodo = todo.deleteTodo();
-      const newTodos = todoMap.set(id, newTodo);
-      writeFile(newTodos);
-      console.log(`Deleted todo! (id: ${id})`);
+    .command('delete [idString]', 'Enter todo id which you want to be done.')
+    .action(idString => {
+      const id = Number(idString);
+      if (informNaN(id)) return;
+      updateDelete(id);
+      show();
     });
 
   cli.command('show', 'show todo-list').action(() => {

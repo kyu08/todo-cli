@@ -1,5 +1,4 @@
 import { tableNormal } from './models/Table';
-// eslint-disable-next-line import/no-cycle
 import { read } from './models/Todo';
 
 const convertBool = (done: boolean): string => {

@@ -1,7 +1,5 @@
 import * as inquirer from 'inquirer';
-// eslint-disable-next-line import/no-cycle
 import { concatAndWriteFile, read, Todo, TodoProps } from './Todo';
-// eslint-disable-next-line import/no-cycle
 import { show } from '../View';
 import { returnDate } from './Date';
 
