@@ -90,3 +90,27 @@ export const updateMapAndFile = (todo: TodoProps): void => {
   const todoMap = returnTodoMap();
   updateFile(todoMap.set(todo.id, todo));
 };
+
+export const passNewTodoToInquirer = ({
+  todoCategory,
+  content,
+  deadline,
+}: {
+  todoCategory: todoCategoryType;
+  content: string;
+  deadline: string;
+}): TodoInterface => {
+  const todoMap = returnTodoMap();
+  const newId = todoMap.size + 1;
+  const props: TodoProps = {
+    id: newId,
+    todoCategory,
+    content,
+    deadline,
+    isDone: false,
+    isDeleted: false,
+    updateAt: new Date(),
+  };
+
+  return new Todo(props);
+};

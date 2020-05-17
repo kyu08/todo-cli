@@ -1,5 +1,11 @@
 import * as inquirer from 'inquirer';
-import { updateMapAndFile, returnTodoMap, Todo, TodoProps } from './Todo';
+import {
+  updateMapAndFile,
+  returnTodoMap,
+  Todo,
+  TodoProps,
+  passNewTodoToInquirer,
+} from './Todo';
 import { show } from '../View';
 import { returnDate } from './Date';
 
@@ -24,27 +30,15 @@ export const addTodo = () => {
   inquirer
     .prompt(QUESTIONS)
     .then((answers: any) => {
-      const { todoCategory, content, deadline } = answers;
-      const todoMap = returnTodoMap();
-      const newId = todoMap.size + 1;
-      const props: TodoProps = {
-        id: newId,
-        todoCategory,
-        content,
-        deadline,
-        isDone: false,
-        isDeleted: false,
-        updateAt: new Date(),
-      };
-      const todo = new Todo(props);
+      const todo = passNewTodoToInquirer(answers);
       updateMapAndFile(todo);
       show();
     })
     .catch(error => {
       if (error.isTtyError) {
-        // Prompt couldn't be rendered in the current environment
+        console.log(error);
       } else {
-        // Something else when wrong
+        console.log(error);
       }
     });
 };
