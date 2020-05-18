@@ -17,6 +17,7 @@ const guardIncorrectId = (id: number): boolean => {
 
 export const bootCac = () => {
   cli.command('add', 'Enter todo id which you want to be done.').action(() => {
+    // ここがおかしい
     addTodo();
   });
 
