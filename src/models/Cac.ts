@@ -5,9 +5,9 @@ import { show } from '../View';
 
 const cli = cac();
 
-export const informNaN = (id: number): boolean => {
-  if (Number.isNaN(id)) {
-    console.log('didnt update.');
+const guardIncorrectId = (id: number): boolean => {
+  if (Number.isNaN(id) || hasNoTodo(id)) {
+    console.log('ID you entered was incorrect.');
 
     return true;
   }
@@ -25,11 +25,9 @@ export const bootCac = () => {
     .command('done [idString]', 'Enter todo id which you want to be done.')
     .action(idString => {
       const id = Number(idString);
-      if (hasNoTodo(id)) return;
-      if (informNaN(id)) return;
-
       const todo = searchTodo(id);
       const newTodo = todo.doneTodo();
+      if (guardIncorrectId(id)) return;
       updateBoolean(id, newTodo, 'Done todo!');
       show();
     });
@@ -38,11 +36,9 @@ export const bootCac = () => {
     .command('delete [idString]', 'Enter todo id which you want to be done.')
     .action(idString => {
       const id = Number(idString);
-      if (hasNoTodo(id)) return;
-      if (informNaN(id)) return;
-
       const todo = searchTodo(id);
       const newTodo = todo.deleteTodo();
+      if (guardIncorrectId(id)) return;
       updateBoolean(id, newTodo, 'Deleted todo!');
       show();
     });
