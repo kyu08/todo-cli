@@ -1,5 +1,12 @@
 import * as inquirer from 'inquirer';
-import { updateMapAndFile, passNewTodoToInquirer } from './Todo';
+import {
+  updateMapAndFile,
+  passNewTodoToInquirer,
+  TodoInterface,
+  TodoProps,
+  Todo,
+  TodoCategoryType,
+} from './Todo';
 import { show } from '../View';
 
 const QUESTIONS = [
@@ -21,14 +28,21 @@ const QUESTIONS = [
 
 // 対話形式で todo の情報を受け取り、todo インスタンスの生成をし、
 //  file を更新、最後に最新のtodoTableを表示する。
-export const addTodo = () => {
-  inquirer
+// ここどうやったらany消せるんだろう...って思ったけどinquirerな部分だから信頼してもいいか。
+// any を消す目的は安全なコードにすることだけどそこはinquirerに任せればいいか。。
+export const addTodo = (): Promise<any> => {
+  // ここのreturn が必要な理由をイマイチ理解していない。。。
+  return inquirer
     .prompt(QUESTIONS)
-    .then((answers: any) => {
-      const todo = passNewTodoToInquirer(answers);
-      updateMapAndFile(todo);
-      show();
-    })
+    .then(
+      (answers: any): Promise<TodoInterface> => {
+        const todo: TodoInterface = passNewTodoToInquirer(answers);
+
+        return new Promise(resolve => {
+          resolve(todo);
+        });
+      },
+    )
     .catch(error => {
       if (error.isTtyError) {
         console.log(error);

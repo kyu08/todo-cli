@@ -2,13 +2,20 @@ import cac from 'cac';
 import { addTodo } from './Inquirer';
 import { updateProp } from './TodoMap';
 import { show } from '../View';
-import { TodoPropType } from './Todo';
+import { Todo, TodoPropType, updateMapAndFile } from './Todo';
 
 const cli = cac();
 
 export const bootCac = () => {
   cli.command('add', 'Enter todo id which you want to be done.').action(() => {
-    addTodo();
+    addTodo()
+      .then(todo => {
+        updateMapAndFile(todo);
+        show();
+      })
+      .catch(e => {
+        console.log(e);
+      });
   });
 
   cli
