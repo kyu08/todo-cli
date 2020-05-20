@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-cycle
 import { loadFile, updateFile } from '../dao/Dao';
 
-export type todoCategoryType = 'daily' | 'oneShot';
+export type TodoCategoryType = 'daily' | 'oneShot';
 
 export interface TodoProps {
   id: number;
-  todoCategory: todoCategoryType;
+  todoCategory: TodoCategoryType;
   content: string;
   deadline: any;
   isDone: boolean;
@@ -13,15 +13,24 @@ export interface TodoProps {
   updateAt: Date;
 }
 
+export interface TodoPropsOptional {
+  id?: number;
+  todoCategory?: TodoCategoryType;
+  content?: string;
+  deadline?: any;
+  isDone?: boolean;
+  isDeleted?: boolean;
+  updateAt?: Date;
+}
+
 export interface TodoInterface extends TodoProps {
-  deleteTodo(): TodoProps;
-  doneTodo(): TodoProps;
+  returnUpdatedInstance(prop: string, value: any): TodoProps;
 }
 
 export class Todo implements TodoInterface {
   id: number;
 
-  todoCategory: todoCategoryType;
+  todoCategory: TodoCategoryType;
 
   content: string;
 
@@ -52,24 +61,12 @@ export class Todo implements TodoInterface {
     this.updateAt = updateAt;
   }
 
-  doneTodo = (): TodoProps => {
-    const todo = new Todo({
+  returnUpdatedInstance = (prop: string, value: any): TodoProps => {
+    return new Todo({
       ...this,
-      ...{ isDone: true },
+      ...{ [prop]: value },
       ...{ updateAt: new Date() },
     });
-
-    return todo;
-  };
-
-  deleteTodo = (): TodoProps => {
-    const todo = new Todo({
-      ...this,
-      ...{ isDeleted: true },
-      ...{ updateAt: new Date() },
-    });
-
-    return todo;
   };
 }
 
@@ -96,7 +93,7 @@ export const passNewTodoToInquirer = ({
   content,
   deadline,
 }: {
-  todoCategory: todoCategoryType;
+  todoCategory: TodoCategoryType;
   content: string;
   deadline: string;
 }): TodoInterface => {

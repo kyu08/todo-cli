@@ -14,7 +14,7 @@ export const searchTodo = (id: number): any => {
   return todo;
 };
 
-export const updateBoolean = (
+export const setEntryToMap = (
   id: number,
   todoUpdated: TodoInterface,
   message: string,
@@ -24,19 +24,26 @@ export const updateBoolean = (
   console.log(`${message}(id: ${id})`);
 };
 
-// 本当はこう書きたい
-// export const updateBooleanReal = (
-//   id: number,
-//   updateFunction: any,
-//   message: string,
-// ): void => {
-//   if (hasNoTodo(id)) return;
-//   if (informNaN(id)) return;
-//   const todo = searchTodo(id);
-//   const todoUpdated = todo.updateFunction();
-//   const todoMap = read();
-//   writeFile(todoMap.set(id, todoUpdated));
-//   console.log(`${message}(id: ${id})`);
-// };
-//
-// updateBooleanReal(1, deleteTodo, 'hoge');
+export const guardIncorrectId = (id: number): boolean => {
+  if (Number.isNaN(id) || hasNoTodo(id)) {
+    console.log('ID you entered was incorrect.');
+
+    return true;
+  }
+
+  return false;
+};
+
+export const updateProp = <T>(
+  idString: string,
+  prop: string,
+  value: T,
+  message: string,
+) => {
+  const id = Number(idString);
+  const todo = searchTodo(id);
+  // todo prop の判定もするべき
+  const newTodo = todo.returnUpdatedInstance(prop, value);
+  if (guardIncorrectId(id)) return;
+  setEntryToMap(id, newTodo, message);
+};
