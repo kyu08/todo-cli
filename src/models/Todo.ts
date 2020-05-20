@@ -3,6 +3,15 @@ import { loadFile, updateFile } from '../dao/Dao';
 
 export type TodoCategoryType = 'daily' | 'oneShot';
 
+export type TodoPropType =
+  | 'id'
+  | 'todoCategory'
+  | 'content'
+  | 'deadline'
+  | 'isDone'
+  | 'isDeleted'
+  | 'updateAt';
+
 export interface TodoProps {
   id: number;
   todoCategory: TodoCategoryType;
@@ -11,16 +20,6 @@ export interface TodoProps {
   isDone: boolean;
   isDeleted: boolean;
   updateAt: Date;
-}
-
-export interface TodoPropsOptional {
-  id?: number;
-  todoCategory?: TodoCategoryType;
-  content?: string;
-  deadline?: any;
-  isDone?: boolean;
-  isDeleted?: boolean;
-  updateAt?: Date;
 }
 
 export interface TodoInterface extends TodoProps {

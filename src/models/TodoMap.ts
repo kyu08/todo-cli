@@ -1,4 +1,4 @@
-import { returnTodoMap, TodoInterface } from './Todo';
+import { returnTodoMap, TodoInterface, TodoPropType } from './Todo';
 import { updateFile } from '../dao/Dao';
 
 export const hasNoTodo = (id: number): boolean => {
@@ -36,7 +36,7 @@ export const guardIncorrectId = (id: number): boolean => {
 
 export const updateProp = <T>(
   idString: string,
-  prop: string,
+  prop: TodoPropType,
   value: T,
   message: string,
 ) => {
