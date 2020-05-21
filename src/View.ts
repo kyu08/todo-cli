@@ -53,11 +53,11 @@ const insertRows = (todoCategorySelector: TodoCategoryType) => {
   return table;
 };
 
-const decorateMessage = (msg: string): void => {
+const showTableTitle = (tableTitle: string): void => {
   // todo ここの空白もっと綺麗に書きたい
   console.log(
     chalk.bold.whiteBright.bgGray(
-      `                         ${msg}                         `,
+      `                         ${tableTitle}                         `,
     ),
   );
 };
@@ -65,8 +65,8 @@ const decorateMessage = (msg: string): void => {
 export const executeShowTable = (): void => {
   const tableDaily = insertRows('daily');
   const tableOneShot = insertRows('oneShot');
-  decorateMessage('Daily Todo Table');
+  showTableTitle('Daily Todo Table');
   showTable(tableDaily);
-  decorateMessage('OneShot Todo Table');
+  showTableTitle('OneShot Todo Table');
   showTable(tableOneShot);
 };
