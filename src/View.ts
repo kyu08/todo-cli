@@ -1,4 +1,5 @@
 import Table from 'cli-table';
+import chalk from 'chalk';
 import { generateTableOnlyHeader } from './models/Table';
 import { returnTodoMap, TodoCategoryType } from './models/Todo';
 import { returnDate } from './models/Date';
@@ -26,9 +27,17 @@ const insertRows = (todoCategorySelector: TodoCategoryType) => {
   const table = generateTableOnlyHeader(headerItem);
   const todoMap = returnTodoMap();
   todoMap.forEach(v => {
-    if (v.isDeleted) return table;
-    if (v.todoCategory !== todoCategorySelector) return table;
-    const { id, todoCategory, content, deadline, isDone, updateAt } = v;
+    const {
+      id,
+      todoCategory,
+      content,
+      deadline,
+      isDone,
+      updateAt,
+      isDeleted,
+    } = v;
+    if (isDeleted) return table;
+    if (todoCategory !== todoCategorySelector) return table;
     const todoShaped = [
       id,
       convertBool(isDone),
@@ -44,9 +53,20 @@ const insertRows = (todoCategorySelector: TodoCategoryType) => {
   return table;
 };
 
+const decorateMessage = (msg: string): void => {
+  // todo ここの空白もっと綺麗に書きたい
+  console.log(
+    chalk.bold.whiteBright.bgGray(
+      `                         ${msg}                         `,
+    ),
+  );
+};
+
 export const executeShowTable = (): void => {
   const tableDaily = insertRows('daily');
   const tableOneShot = insertRows('oneShot');
+  decorateMessage('Daily Todo Table');
   showTable(tableDaily);
+  decorateMessage('OneShot Todo Table');
   showTable(tableOneShot);
 };
