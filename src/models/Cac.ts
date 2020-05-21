@@ -1,7 +1,7 @@
 import cac from 'cac';
 import { addTodo } from './Inquirer';
 import { updateProp } from './TodoMap';
-import { show } from '../View';
+import { executeShowTable } from '../View';
 import { TodoPropType, updateMapAndFile } from './Todo';
 
 const cli = cac();
@@ -11,7 +11,7 @@ export const bootCac = () => {
     addTodo()
       .then(todo => {
         updateMapAndFile(todo);
-        show();
+        executeShowTable();
       })
       .catch(e => {
         console.log(e);
@@ -26,7 +26,7 @@ export const bootCac = () => {
       const message = 'Done Todo!';
       const value: T = true;
       updateProp<T>(idString, prop, value, message);
-      show();
+      executeShowTable();
     });
 
   cli
@@ -37,11 +37,11 @@ export const bootCac = () => {
       const message = 'Deleted Todo!';
       const value: T = true;
       updateProp<T>(idString, prop, value, message);
-      show();
+      executeShowTable();
     });
 
   cli.command('show', 'show todo-list').action(() => {
-    show();
+    executeShowTable();
   });
 
   cli.help();

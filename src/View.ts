@@ -1,5 +1,6 @@
-import { tableNormal } from './models/Table';
-import { returnTodoMap } from './models/Todo';
+import Table from 'cli-table';
+import { generateTableOnlyHeader } from './models/Table';
+import { returnTodoMap, TodoCategoryType } from './models/Todo';
 import { returnDate } from './models/Date';
 
 const convertBool = (isDone: boolean): string => {
@@ -8,13 +9,26 @@ const convertBool = (isDone: boolean): string => {
   return 'not yet...';
 };
 
-export const show = () => {
-  const table = tableNormal;
+const showTable = (table: Table) => {
+  console.log(table.toString());
+};
+
+// 'daily' と 'oneShot' を別々の table で表示
+const insertRows = (todoCategorySelector: TodoCategoryType) => {
+  const headerItem = [
+    'ID',
+    'Done',
+    'TodoType',
+    'Content',
+    'Deadline',
+    'UpdateAt',
+  ];
+  const table = generateTableOnlyHeader(headerItem);
   const todoMap = returnTodoMap();
-  todoMap.forEach((v, k) => {
+  todoMap.forEach(v => {
     if (v.isDeleted) return table;
-    const id = k;
-    const { todoCategory, content, deadline, isDone, updateAt } = v;
+    if (v.todoCategory !== todoCategorySelector) return table;
+    const { id, todoCategory, content, deadline, isDone, updateAt } = v;
     const todoShaped = [
       id,
       convertBool(isDone),
@@ -26,5 +40,13 @@ export const show = () => {
 
     return table.push(todoShaped);
   });
-  console.log(table.toString());
+
+  return table;
+};
+
+export const executeShowTable = (): void => {
+  const tableDaily = insertRows('daily');
+  const tableOneShot = insertRows('oneShot');
+  showTable(tableDaily);
+  showTable(tableOneShot);
 };
