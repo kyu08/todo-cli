@@ -42,7 +42,6 @@ export const updateProp = <T>(
 ) => {
   const id = Number(idString);
   const todo = searchTodo(id);
-  // todo prop の判定もするべき
   const newTodo = todo.returnUpdatedInstance(prop, value);
   if (guardIncorrectId(id)) return;
   setEntryToMap(id, newTodo, message);

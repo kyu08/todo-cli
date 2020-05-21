@@ -2,7 +2,7 @@ import cac from 'cac';
 import { addTodo } from './Inquirer';
 import { updateProp } from './TodoMap';
 import { show } from '../View';
-import { Todo, TodoPropType, updateMapAndFile } from './Todo';
+import { TodoPropType, updateMapAndFile } from './Todo';
 
 const cli = cac();
 

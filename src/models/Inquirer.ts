@@ -1,13 +1,5 @@
 import * as inquirer from 'inquirer';
-import {
-  updateMapAndFile,
-  passNewTodoToInquirer,
-  TodoInterface,
-  TodoProps,
-  Todo,
-  TodoCategoryType,
-} from './Todo';
-import { show } from '../View';
+import { passNewTodoToInquirer, TodoInterface } from './Todo';
 
 const QUESTIONS = [
   {
@@ -31,7 +23,6 @@ const QUESTIONS = [
 // ここどうやったらany消せるんだろう...って思ったけどinquirerな部分だから信頼してもいいか。
 // any を消す目的は安全なコードにすることだけどそこはinquirerに任せればいいか。。
 export const addTodo = (): Promise<any> => {
-  // ここのreturn が必要な理由をイマイチ理解していない。。。
   return inquirer
     .prompt(QUESTIONS)
     .then(

@@ -83,10 +83,8 @@ export const returnTodoMap = (): Map<number, TodoProps> => {
 };
 
 export const updateMapAndFile = (todo: TodoProps): void => {
-  // console.log('id', todo.id);
   const todoMap = returnTodoMap();
   updateFile(todoMap.set(todo.id, todo));
-  // console.log('todomap', todoMap);
 };
 
 export const passNewTodoToInquirer = ({
