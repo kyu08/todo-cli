@@ -1,5 +1,9 @@
 // eslint-disable-next-line import/no-cycle
-import { loadFile, updateFile } from '../dao/Dao';
+import { loadFile } from '../dao/Dao';
+// eslint-disable-next-line import/no-cycle
+import { executeShowTable } from '../View';
+// eslint-disable-next-line import/no-cycle
+import { setEntryToMap } from './TodoMap';
 
 export type TodoCategoryType = 'daily' | 'oneShot';
 
@@ -82,11 +86,6 @@ export const returnTodoMap = (): Map<number, TodoProps> => {
   return todoMap;
 };
 
-export const updateMapAndFile = (todo: TodoProps): void => {
-  const todoMap = returnTodoMap();
-  updateFile(todoMap.set(todo.id, todo));
-};
-
 export const passNewTodoToInquirer = ({
   todoCategory,
   content,
@@ -109,4 +108,10 @@ export const passNewTodoToInquirer = ({
   };
 
   return new Todo(props);
+};
+
+export const executeAddTodo = (todo: TodoInterface) => {
+  const message = 'Added todo!';
+  setEntryToMap(todo, message);
+  executeShowTable();
 };

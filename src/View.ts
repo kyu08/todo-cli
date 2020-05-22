@@ -1,6 +1,7 @@
 import Table from 'cli-table';
 import chalk from 'chalk';
 import { generateTableOnlyHeader } from './models/Table';
+// eslint-disable-next-line import/no-cycle
 import { returnTodoMap, TodoCategoryType } from './models/Todo';
 import { returnDate } from './models/Date';
 
