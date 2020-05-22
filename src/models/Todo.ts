@@ -80,7 +80,7 @@ export const returnTodoMap = (): Map<number, TodoProps> => {
   const parsedData = JSON.parse(data);
   const todoMap: Map<number, TodoProps> = new Map(parsedData);
   todoMap.forEach((v: TodoProps, k: number, map: Map<number, TodoProps>) => {
-    map.set(k, new Todo(v));
+    map.set(k, new Todo({ ...v, ...{ updateAt: new Date(v.updateAt) } }));
   });
 
   return todoMap;
