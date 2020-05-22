@@ -43,12 +43,17 @@ export const guardIncorrectId = (id: number): boolean => {
   return false;
 };
 
-export const updateProp = <T>(
-  idString: string,
-  prop: TodoPropType,
-  value: T,
-  message: string,
-) => {
+export const updateProp = <T>({
+  idString,
+  prop,
+  value,
+  message,
+}: {
+  idString: string;
+  prop: TodoPropType;
+  value: T;
+  message: string;
+}) => {
   const id = Number(idString);
   if (guardIncorrectId(id)) return;
   const todo = searchTodo(id);
@@ -59,12 +64,14 @@ export const updateProp = <T>(
 
 export const executeDoneProp = (idString: string): void => {
   const prop: TodoPropType = 'isDone';
+  const value = true;
   const message = 'Done Todo!';
-  updateProp<boolean>(idString, prop, true, message);
+  updateProp<boolean>({ idString, prop, value, message });
 };
 
 export const executeDeleteProp = (idString: string): void => {
   const prop: TodoPropType = 'isDeleted';
+  const value = true;
   const message = 'Deleted Todo!';
-  updateProp<boolean>(idString, prop, true, message);
+  updateProp<boolean>({ idString, prop, value, message });
 };
