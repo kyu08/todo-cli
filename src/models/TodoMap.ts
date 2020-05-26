@@ -23,7 +23,6 @@ export const setEntryToMap = (
   console.log(`${message}(id: ${id})`);
 };
 
-
 export const updateProp = <T>({
   id,
   prop,

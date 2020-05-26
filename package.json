@@ -21,7 +21,7 @@
     "cli"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kyu08/todo-cli/issues"
   },
@@ -33,6 +33,11 @@
     "@types/prettier": "^1.19.0",
     "@types/recharts": "^1.8.3",
     "@types/stylelint": "^9.10.1",
+    "@types/cli-table": "^0.3.0",
+    "@types/colors": "^1.2.1",
+    "@types/date-fns": "^2.6.0",
+    "@types/filesystem": "0.0.29",
+    "@types/inquirer": "^6.5.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "eslint": "^7.0.0",
@@ -45,7 +50,6 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
     "prettier-stylelint": "^0.4.2",
@@ -61,18 +65,11 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@types/cli-table": "^0.3.0",
-    "@types/colors": "^1.2.1",
-    "@types/date-fns": "^2.6.0",
-    "@types/filesystem": "0.0.29",
-    "@types/inquirer": "^6.5.0",
     "cac": "^6.5.8",
     "chalk": "^4.0.0",
     "cli-table": "^0.3.1",
     "colors": "^1.4.0",
     "date-fns": "^2.13.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-plugin-import": "^2.20.2",
     "inquirer": "^7.1.0"
   }
 }
