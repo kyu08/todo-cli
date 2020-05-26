@@ -5,16 +5,16 @@ const QUESTIONS = [
   {
     type: 'list',
     name: 'todoCategory',
-    message: 'Choose a todoCategory',
+    message: 'Choose a todoCategory.',
     choices: ['daily', 'oneShot'],
   },
   {
     name: 'content',
-    message: 'content: string',
+    message: 'Enter todo content.\n(半角文字で入力してください)',
   },
   {
     name: 'deadline',
-    message: 'deadline: any',
+    message: 'Enter deadline.',
   },
 ];
 
