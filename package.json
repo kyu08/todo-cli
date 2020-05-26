@@ -1,6 +1,6 @@
 {
-  "name": "todo-cli",
-  "private": true,
+  "name": "great-todo-cli",
+  "private": false,
   "version": "1.0.0",
   "description": "cli で使えるtodoアプリ。デイリータスクとやりきりのタスクを別で管理したい。",
   "scripts": {
@@ -10,7 +10,7 @@
   "mode": "development",
   "preferGlobal": true,
   "bin": {
-    "todo": "./bin/todo.js"
+    "todo": "/bin/todo.js"
   },
   "repository": {
     "type": "git",
