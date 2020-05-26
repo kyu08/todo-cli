@@ -3,10 +3,14 @@ cli で使えるtodoアプリ。デイリータスクとやりきりのタスク
 
 # 使用方法
 ```
-$ todo show // すべてのtodoをtodo category 別に表示
-$ todo add // todo を追加 (todo content は半角で記述してください)
-$ todo done <taskId> // (taskId: number) todo を実行済みにする
-$ todo delete <taskId> // (taskId: number) todo を削除
+// todo を追加 (todo content は半角で記述してください)
+$ todo add
+// すべてのtodoをtodo category 別に表示
+$ todo show
+// (taskId: number) todo を実行済みにする
+$ todo done <taskId>
+// (taskId: number) todo を削除
+$ todo delete <taskId>
 ```
 
 # 機能

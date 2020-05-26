@@ -1,7 +1,7 @@
 {
   "name": "great-todo-cli",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "cli で使えるtodoアプリ。デイリータスクとやりきりのタスクを別で管理したい。",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
