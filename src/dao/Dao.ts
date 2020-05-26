@@ -4,7 +4,7 @@ import { TodoProps } from '../models/Todo';
 
 export const path = 'todo.json';
 
-export const sureJSONExist = () => {
+export const sureJSONExist = (): void => {
   try {
     fs.statSync(path);
 
