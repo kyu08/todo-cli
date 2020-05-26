@@ -6,4 +6,3 @@ package-lock.json
 todo.json
 .eslintrc.js
 .eslintignore
-dist
