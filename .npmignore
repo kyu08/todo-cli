@@ -1,8 +1,0 @@
-node_modules
-.idea
-.vscode
-*.iml
-package-lock.json
-todo.json
-.eslintrc.js
-.eslintignore
