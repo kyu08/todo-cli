@@ -13,7 +13,6 @@ $ todo done <taskId>
 $ todo delete <taskId>
 ```
 
-# moge
 ![todo add1](https://github.com/kyu08/todo-cli/blob/images/todo-cli1.png?raw=true)
 
 ![todo add2](https://github.com/kyu08/todo-cli/blob/images/todo-cli2.png?raw=true)
