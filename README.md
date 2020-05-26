@@ -3,6 +3,8 @@ cli で使えるtodoアプリ。デイリータスクとやりきりのタスク
 
 # 使用方法
 ```
+// インストール
+$ npm install -g great-todo-cli
 // todo を追加 (todo content は半角で記述してください)
 $ todo add
 // すべてのtodoをtodo category 別に表示
