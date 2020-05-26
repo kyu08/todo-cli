@@ -19,3 +19,4 @@ $ todo delete <taskId> // (taskId: number) todo を削除
 - doneにできる
 - todoは削除することができる
 
+This software is released under the MIT License, see LICENSE.md
