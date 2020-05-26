@@ -13,6 +13,15 @@ $ todo done <taskId>
 $ todo delete <taskId>
 ```
 
+# moge
+![todo add1](https://github.com/kyu08/todo-cli/blob/images/todo-cli1.png?raw=true)
+
+![todo add2](https://github.com/kyu08/todo-cli/blob/images/todo-cli2.png?raw=true)
+
+![todo add3](https://github.com/kyu08/todo-cli/blob/images/todo-cli3.png?raw=true)
+
+![todo add show](https://github.com/kyu08/todo-cli/blob/images/todo-cli4.png?raw=true)
+
 # 機能
 - todo を表示する
   - todoをoneShot と dailyTask、別々に一覧表示。
