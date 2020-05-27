@@ -112,7 +112,7 @@ export const passNewTodoToInquirer = ({
   todoCategory: TodoCategoryType;
   content: string;
   deadline: string;
-}): TodoInterface => {
+}): Todo => {
   const todoMap = returnTodoMap();
   const newId = todoMap.size + 1;
   const props: TodoProps = {
@@ -128,7 +128,7 @@ export const passNewTodoToInquirer = ({
   return new Todo(props);
 };
 
-export const executeAddTodo = (todo: TodoInterface): void => {
+export const executeAddTodo = (todo: Todo): void => {
   const message = 'Added todo!';
   setEntryToMap(todo, message);
   executeShowTable();

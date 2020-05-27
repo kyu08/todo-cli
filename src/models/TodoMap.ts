@@ -15,10 +15,7 @@ export const searchTodo = (id: number): any => {
   return todo;
 };
 
-export const setEntryToMap = (
-  todoUpdated: TodoInterface,
-  message: string,
-): void => {
+export const setEntryToMap = (todoUpdated: Todo, message: string): void => {
   const todoMap = returnTodoMap();
   const { id } = todoUpdated;
   updateFile(todoMap.set(id, todoUpdated));
