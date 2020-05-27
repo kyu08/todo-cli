@@ -33,4 +33,12 @@ $ todo delete <taskId>
 - doneにできる
 - todoは削除することができる
 
+# 開発者向け
+- cloneしたのち、以下のコマンドを実行することでtodoコマンドを実行できる状態になります。
+```
+$ npm i
+$ npm run build
+```
+- テストコードは`src/test`に配置されています。`$ npm test`でテストが実行されます。
+
 This software is released under the MIT License, see LICENSE.md
