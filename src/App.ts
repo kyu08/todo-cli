@@ -3,7 +3,7 @@ import { executeInitializeDailyTodo } from './models/TodoMap';
 import { sureJSONExist } from './dao/Dao';
 
 export class App {
-  mount = () => {
+  mount = (): void => {
     sureJSONExist();
     executeInitializeDailyTodo();
     bootCac();

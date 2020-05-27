@@ -33,7 +33,7 @@ export const updateProp = <T>({
   prop: TodoPropType;
   value: T;
   message: string;
-}) => {
+}): void => {
   const todo = searchTodo(id);
   const newTodo = todo.returnUpdatedInstance(prop, value);
   setEntryToMap(newTodo, message);

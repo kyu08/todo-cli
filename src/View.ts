@@ -11,12 +11,12 @@ const convertBool = (isDone: boolean): string => {
   return 'not yet...';
 };
 
-const showTable = (table: Table) => {
+const showTable = (table: Table): void => {
   console.log(table.toString());
 };
 
 // 'daily' と 'oneShot' を別々の table で表示
-const insertRows = (todoCategorySelector: TodoCategoryType) => {
+const insertRows = (todoCategorySelector: TodoCategoryType): Table => {
   const headerItem = [
     'ID',
     'Done',
@@ -36,10 +36,10 @@ const insertRows = (todoCategorySelector: TodoCategoryType) => {
       isDone,
       updateAt,
       isDeleted,
-    } = v;
+    }: any = v;
     if (isDeleted) return table;
     if (todoCategory !== todoCategorySelector) return table;
-    const todoShaped = [
+    const todoShaped: any = [
       id,
       convertBool(isDone),
       todoCategory,
