@@ -1,4 +1,4 @@
-import { guardIncorrectId } from '../models/TodoMap';
+import { guardIncorrectId, hasNoTodo } from '../models/TodoMap';
 
 describe('guardIncorrectId', (): void => {
   test('NaN', (): void => {
@@ -11,5 +11,31 @@ describe('guardIncorrectId', (): void => {
     const id = 1;
     const res = guardIncorrectId(id);
     expect(res).toBe(false);
+  });
+
+  test('infinity', (): void => {
+    const id = Number(Infinity);
+    const res = guardIncorrectId(id);
+    expect(res).toBe(true);
+  });
+});
+
+describe('hasNoTodo', (): void => {
+  test('NaN', (): void => {
+    const id = Number(NaN);
+    const res = hasNoTodo(id);
+    expect(res).toBe(true);
+  });
+
+  test('correctId', (): void => {
+    const id = 1;
+    const res = hasNoTodo(id);
+    expect(res).toBe(false);
+  });
+
+  test('infinity', (): void => {
+    const id = Number(Infinity);
+    const res = hasNoTodo(id);
+    expect(res).toBe(true);
   });
 });

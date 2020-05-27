@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { returnTodoMap, Todo, TodoInterface, TodoPropType } from './Todo';
+import { returnTodoMap, Todo, TodoPropType } from './Todo';
 // eslint-disable-next-line import/no-cycle
 import { updateFile } from '../dao/Dao';
 // eslint-disable-next-line import/no-cycle

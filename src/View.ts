@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import { generateTableOnlyHeader } from './models/Table';
 // eslint-disable-next-line import/no-cycle
 import { returnTodoMap, TodoCategoryType, TodoProps } from './models/Todo';
-import { returnDate } from './models/Date';
+import { returnDateAndTime } from './models/Date';
 
 const convertBool = (isDone: boolean): string => {
   if (isDone) return 'done!';
@@ -52,7 +52,7 @@ const insertRows = (todoCategorySelector: TodoCategoryType): Table => {
       todoCategory,
       content,
       deadline,
-      returnDate(new Date(updateAt)),
+      returnDateAndTime(new Date(updateAt)),
     ];
 
     return table.push(todoShaped);
