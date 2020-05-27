@@ -1,10 +1,10 @@
 {
   "name": "great-todo-cli",
   "private": false,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "cli で使えるtodoアプリ。デイリータスクとやりきりのタスクを別で管理したい。",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack --watch"
   },
   "mode": "development",
@@ -26,18 +26,36 @@
     "url": "https://github.com/kyu08/todo-cli/issues"
   },
   "homepage": "https://github.com/kyu08/todo-cli#readme",
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/src/tests/**/*.test.ts"
+    ]
+  },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
+    "@types/cli-table": "^0.3.0",
+    "@types/colors": "^1.2.1",
+    "@types/date-fns": "^2.6.0",
     "@types/eslint-plugin-prettier": "^2.2.0",
+    "@types/filesystem": "0.0.29",
+    "@types/inquirer": "^6.5.0",
+    "@types/jest": "^25.2.3",
     "@types/node": "^13.13.5",
     "@types/prettier": "^1.19.0",
     "@types/recharts": "^1.8.3",
     "@types/stylelint": "^9.10.1",
-    "@types/cli-table": "^0.3.0",
-    "@types/colors": "^1.2.1",
-    "@types/date-fns": "^2.6.0",
-    "@types/filesystem": "0.0.29",
-    "@types/inquirer": "^6.5.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "eslint": "^7.0.0",
@@ -50,6 +68,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "jest": "^26.0.1",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
     "prettier-stylelint": "^0.4.2",
@@ -59,6 +78,7 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-order": "^3.1.1",
     "stylelint-processor-styled-components": "^1.9.0",
+    "ts-jest": "^26.0.0",
     "ts-loader": "^7.0.2",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
