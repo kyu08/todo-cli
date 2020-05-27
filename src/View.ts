@@ -2,7 +2,7 @@ import Table from 'cli-table';
 import chalk from 'chalk';
 import { generateTableOnlyHeader } from './models/Table';
 // eslint-disable-next-line import/no-cycle
-import { returnTodoMap, TodoCategoryType } from './models/Todo';
+import { returnTodoMap, TodoCategoryType, TodoProps } from './models/Todo';
 import { returnDate } from './models/Date';
 
 const convertBool = (isDone: boolean): string => {
@@ -36,10 +36,17 @@ const insertRows = (todoCategorySelector: TodoCategoryType): Table => {
       isDone,
       updateAt,
       isDeleted,
-    }: any = v;
+    }: TodoProps = v;
     if (isDeleted) return table;
     if (todoCategory !== todoCategorySelector) return table;
-    const todoShaped: any = [
+    const todoShaped: [
+      number,
+      string,
+      TodoCategoryType,
+      string,
+      string,
+      string,
+    ] = [
       id,
       convertBool(isDone),
       todoCategory,

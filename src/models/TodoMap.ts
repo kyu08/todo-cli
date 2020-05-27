@@ -1,11 +1,13 @@
 // eslint-disable-next-line import/no-cycle
-import { returnTodoMap, TodoInterface, TodoPropType } from './Todo';
+import { returnTodoMap, Todo, TodoInterface, TodoPropType } from './Todo';
 // eslint-disable-next-line import/no-cycle
 import { updateFile } from '../dao/Dao';
 // eslint-disable-next-line import/no-cycle
 import { executeShowTable } from '../View';
 import { isToday } from './Date';
 
+// ここのany を Todo or TodoInterface って書きたいけどコンパイラ的には Todo | undefined って認識してるらしくうまくいかない。
+// この関数を使う前にguardIncorrectIdで正しいidであることは確認してるけどそれをどうやってコンパイラに伝えればいいんじゃ。
 export const searchTodo = (id: number): any => {
   const todoMap = returnTodoMap();
   const todo = todoMap.get(id);
