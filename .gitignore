@@ -7,3 +7,4 @@ todo.json
 .eslintrc.js
 .eslintignore
 dist
+coverage

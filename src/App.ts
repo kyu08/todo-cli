@@ -1,9 +1,10 @@
 import { bootCac } from './models/Cac';
 import { executeInitializeDailyTodo } from './models/TodoMap';
-import { sureJSONExist } from './dao/Dao';
+import { sureDirectoryExist, sureJSONExist } from './dao/Dao';
 
 export class App {
-  mount = () => {
+  mount = (): void => {
+    sureDirectoryExist();
     sureJSONExist();
     executeInitializeDailyTodo();
     bootCac();

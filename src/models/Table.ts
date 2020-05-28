@@ -20,7 +20,7 @@ const chars = {
 };
 
 // todo Set オブジェクト使ってみよう！
-export const generateTableOnlyHeader = (headerItems: any[]): any => {
+export const generateTableOnlyHeader = (headerItems: string[]): Table => {
   const table = new Table({ chars });
   const decorated = headerItems.map(e => {
     return colors.bold.green(e);

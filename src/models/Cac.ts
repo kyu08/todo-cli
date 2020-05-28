@@ -6,7 +6,7 @@ import { executeAddTodo } from './Todo';
 
 const cli = cac();
 
-export const bootCac = () => {
+export const bootCac = (): void => {
   cli.command('add', 'Enter todo id which you want to be done.').action(() => {
     addTodo()
       .then(todo => {

@@ -1,7 +1,7 @@
 import * as inquirer from 'inquirer';
-import { passNewTodoToInquirer, TodoInterface } from './Todo';
+import { passNewTodoToInquirer, Todo, TodoInterface } from './Todo';
 
-const QUESTIONS = [
+const QUESTIONS: object[] = [
   {
     type: 'list',
     name: 'todoCategory',
@@ -27,7 +27,7 @@ export const addTodo = (): Promise<any> => {
     .prompt(QUESTIONS)
     .then(
       (answers: any): Promise<TodoInterface> => {
-        const todo: TodoInterface = passNewTodoToInquirer(answers);
+        const todo: Todo = passNewTodoToInquirer(answers);
 
         return new Promise(resolve => {
           resolve(todo);

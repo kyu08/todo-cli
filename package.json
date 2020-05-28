@@ -1,10 +1,11 @@
 {
   "name": "great-todo-cli",
   "private": false,
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "cli で使えるtodoアプリ。デイリータスクとやりきりのタスクを別で管理したい。",
   "scripts": {
     "test": "jest",
+    "testc": "jest --coverage",
     "build": "webpack --watch"
   },
   "mode": "development",

@@ -2,8 +2,8 @@ import Table from 'cli-table';
 import chalk from 'chalk';
 import { generateTableOnlyHeader } from './models/Table';
 // eslint-disable-next-line import/no-cycle
-import { returnTodoMap, TodoCategoryType } from './models/Todo';
-import { returnDate } from './models/Date';
+import { returnTodoMap, TodoCategoryType, TodoProps } from './models/Todo';
+import { returnDateAndTime } from './models/Date';
 
 const convertBool = (isDone: boolean): string => {
   if (isDone) return 'done!';
@@ -11,12 +11,12 @@ const convertBool = (isDone: boolean): string => {
   return 'not yet...';
 };
 
-const showTable = (table: Table) => {
+const showTable = (table: Table): void => {
   console.log(table.toString());
 };
 
 // 'daily' と 'oneShot' を別々の table で表示
-const insertRows = (todoCategorySelector: TodoCategoryType) => {
+const insertRows = (todoCategorySelector: TodoCategoryType): Table => {
   const headerItem = [
     'ID',
     'Done',
@@ -36,16 +36,23 @@ const insertRows = (todoCategorySelector: TodoCategoryType) => {
       isDone,
       updateAt,
       isDeleted,
-    } = v;
+    }: TodoProps = v;
     if (isDeleted) return table;
     if (todoCategory !== todoCategorySelector) return table;
-    const todoShaped = [
+    const todoShaped: [
+      number,
+      string,
+      TodoCategoryType,
+      string,
+      string,
+      string,
+    ] = [
       id,
       convertBool(isDone),
       todoCategory,
       content,
       deadline,
-      returnDate(new Date(updateAt)),
+      returnDateAndTime(new Date(updateAt)),
     ];
 
     return table.push(todoShaped);
